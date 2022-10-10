@@ -1,0 +1,482 @@
+@import "menu.css";
+@import "home.css";
+@import "auth.css";
+@import "inputs-form.css";
+
+* {
+    margin: 0;
+}
+:root {
+    --dark-blue: #1d3557;
+    --blue: #219EBC;
+    --blue-clean: #4cc9f0;
+    --light-blue: #8ECAE6;
+    --snow-color: #edf6f9;
+    --color-titles: #04e762;
+    --white: #fff;
+    --bg-content: #eaf4f4;
+  }
+
+body {
+    font-family: 'Roboto';
+    background-color: #415a77;
+}
+
+.nova-venda-container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 200px);
+    height: 100vh;
+}
+
+.nova-venda-title {
+
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: var(--color-titles);
+    text-align: center;
+    font-size: 25px;
+}
+
+.mini-dashboard-container {
+    display: flex;
+    height: 20vh;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sales-today {
+    display: flex;
+    justify-content: center;
+    box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
+    background-color: var(--white);
+    width: 40%;
+    height: 150px;
+    border:1px solid #70e000;
+    border-radius: 10px;
+
+}
+
+
+
+.content-container {
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+
+.nova-venda-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    height: 100vh;
+    position: relative;
+    left: 10vw;
+    background-color: #415a77;
+}
+
+.default-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    height: 100vh;
+    position: relative;
+    left: 10vw;
+    background-color: #415a77;
+}
+
+@media (max-width: 850px) {
+
+    .nova-venda-container, .menu, .default-container {
+        left: 0;
+        width: 100vw;
+    }
+
+}
+
+.box-nova-venda {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    align-items: space-around;
+    flex-direction: column;
+
+
+}
+.container-insert {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.top-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.default-button-1 {
+    padding: 8px;
+    cursor: pointer;
+    background-color: #198754;
+    color: #fff;
+    text-align: center;
+    border: 0;
+    width: 10%;
+    border-radius: 4px;
+
+}
+.default-button-1 a:visited {
+    color: #fff;
+}
+
+.default-button-2 {
+    cursor: pointer;
+    padding: 8px;
+    background-color: #0d6efd;
+    color: #fff;
+    text-align: center;
+    width: 10%;
+    border: 0;
+    border-radius: 4px;
+}
+
+
+.form:hover {
+    background-color: var(--snow-color);
+    color: #000;
+    border: 1px solid var(--dark-blue);
+    border-radius: 4px;
+}
+
+.inactive {
+    background-color: var(--snow-color);
+    color: #000;
+    border: 1px solid #000;
+}
+.inactive:hover {
+    background-color: #0d6efd;
+    color: var(--snow-color);
+}
+
+.insert-product {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2px;
+    padding: 20px;
+
+    border-radius: 10px 10px 0px 0px;
+}
+.insert-product input {
+    padding: 10px;
+    width: 100%;
+    font-family: 'Roboto';
+    border: 0 none;
+    border-radius: 4px;
+    background-color: var(--white);
+    border-bottom: 2px solid var(--blue-clean);
+    outline: 0;
+}
+.box-nova-venda ul li {
+    list-style: none;
+    display: inline-block;
+}
+
+.pop-up-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pop-up {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 300px;
+    height: 150px;
+    border-radius: 7px;
+    border: 1px solid red;
+    position: absolute;
+    background-color: #FFF;
+    text-align: center;
+}
+
+.search-container {
+    background-color: #fff;
+    width: 90%;
+    border-radius: 7px 7px 0px 0px;
+    height: 40px;
+
+
+}
+
+.search-bar {
+    display: flex;
+    justify-content: flex-start;
+    height:  50px;
+
+    border-radius: 7px 7px 0px 0px;
+    background-color: #003566;
+}
+
+.search-bar .product-form {
+
+    border-radius: 7px 0px 0px 7px;
+    background: none;
+    height: 35px;
+    width: 50%;
+    font-size: 16px;
+    border:0;
+    padding: 0;
+    outline: 0;
+    background-color: #fff;
+}
+.search-btn {
+    background-color: #0d6efd;
+    width:50px;
+    height: 35px;
+    display: flex;
+    border-radius: 0px 10px 10px 0px;
+    justify-content: center;
+    align-items: center;
+}
+.search-btn img {
+    height: 30px;
+}
+
+.table-products {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+.table-products table {
+    background-color: #fff;
+    border-top: 1px solid black;
+    width: 90%;
+    border-collapse: collapse;
+    text-align: center;
+    display: block;
+    max-height: 50vh;
+    overflow-y: scroll;
+    box-shadow:-1px 1px 10px -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+}
+table::-webkit-scrollbar {
+    width: 3px;
+}
+
+table::-webkit-scrollbar-thumb {
+   background-color: #0B8FF9;
+}
+
+.table-products th {
+    color: var(--dark-blue);
+}
+
+.oddelement {
+    background-color: #e5e5e5;
+}
+
+.table-products td {
+    font-size: 14px;
+    padding: 5px;
+    width: 9%;
+    font-family: 'Segoe UI';
+
+}
+
+.final-box {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 80%;
+    height: 5vh;
+    border-radius: 4px;
+    background-color: var(--white);
+    box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
+
+}
+
+.final-new-sale-box {
+    text-align: center;
+    width: 80%;
+
+
+}
+
+/*Produtos*/
+.alterButt {
+    color: green;
+    margin-right: 5px;
+}
+.removeButt {
+    color: red;
+}
+
+/*Controle de estoque*/
+
+.default-box {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #415a77;
+
+}
+
+.all-products-box {
+    border: 1px solid red;
+    height: 20vh;
+    width: 80vw;
+}
+
+.campos-search {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.campos-products {
+    width: 100%;
+    height: 40px;
+    display: flex;
+
+
+    align-items: flex-start;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.campos-product span {
+    color:white;
+}
+.add-product-form {
+    width:100%;
+}
+.change-product {
+    padding: 8px;
+    background-color: #fb8500;
+    color: #fff;
+    text-align: center;
+    width: 10%;
+    border-radius: 4px;
+
+}
+
+
+.alter-product, .add-quantity {
+    width: 100%;
+    height: 50vh;
+}
+
+
+.box-found-items-find {
+    height: 50vh;
+    width: 100%;
+}
+
+.box-found-items-add {
+    height: 50vh;
+}
+
+.add-stock-box{
+    display: none;
+    height: 50vh;
+}
+
+.warn, .warnerror {
+    display: none;
+    padding: 8px;
+    border: 1px solid #0f5131;
+    width: 50%;
+    text-align: center;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.warnerror {
+    color: #842029;
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+}
+
+.warn-container {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+}
+
+
+.paginate nav ul{
+width: 80vw;
+display: flex;
+justify-content: center;
+list-style: none;
+color: red;
+}
+.paginate nav ul li {
+    padding: 5px;
+    border: 1px solid var(--dark-blue);
+    margin: 5px;
+}
+
+.active {
+    background-color: var(--blue);
+    color: var(--snow-color);
+}
+
+/*Contas*/
+.container-options {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+}
+.container-options .default-button-2, .default-button-2 {
+    width: 20%;
+    margin: 20px;
+    text-align: center;
+}
+
+.secondary-warn {
+    border: 1px solid #d3d6d8;
+    background-color: #e2e3e5;
+    color: #41464b;
+    border-radius: 0.375rem;
+    padding: 10px;
+}
+
+.editing-top {
+    width: 100%;
+    display: flex;
+    border-radius: 7px 7px 0px 0px;
+    justify-content: center;
+    background-color: #0B8FF9;
+    color: #fff;
+}
+
+.options-stock-container {
+    display: flex;
+    width:100%;
+    justify-content:center;
+    align-items:center;
+    flex-direction: row;
+}
+

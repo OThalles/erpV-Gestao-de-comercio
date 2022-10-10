@@ -1,0 +1,122 @@
+.home-container {
+    font-family: 'Poppins';
+    left: 10vw;
+    position:relative;
+    display: grid;
+    grid-template-columns: 30% 30%;
+    grid-template-rows: 20% 20%;
+    grid-template-areas:
+    "sell products "
+    "historic-sell graphic-sell ";
+    gap: 20px;
+    width: 90vw;
+    height: 100%;
+    background: linear-gradient(287.56deg, #437DE2 0%, #16F9C1 100%);
+}
+
+@media (max-width: 850px) {
+    .menu-container {
+        width: 100vw;
+        height: 5vh;
+        position: static;
+    }
+    .nova-venda-container, .home-container, .menu {
+        left: 0;
+        width: 100vw;
+    }
+
+}
+
+
+.dashboard-item.sell {
+    grid-area: sell;
+    width: 100%;
+    flex-wrap: wrap;
+    text-align: center;
+    display: flex;
+    align-items:center;
+    flex-direction:column;
+    height: 200px;
+    border: 3px solid #49b6ff;
+    box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
+    background-color: rgba(73, 182, 255);
+    border-radius: 6px;
+}
+
+
+
+.dashboard-item.products {
+    grid-area: products;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items:center;
+    flex-direction:column;
+    height: 150px;
+    border-radius: 6px;
+    background-color: #49b6ff;
+    border: 3px solid #49b6ff;
+    box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.dashboard-item.historic-sell {
+    grid-area: historic-sell;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    flex-direction:column;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 3px solid #49b6ff;
+    box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-item.graphic-sell {
+    grid-area: graphic-sell;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    flex-direction:column;
+    height: 500px;
+    border-radius: 6px;
+    border: 3px solid #49b6ff;
+    box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-item.products h2 {
+    font-size: 100%;
+}
+.dashboard-item.sell h2 {
+    font-size: 100%;
+}
+
+.title-last-sales {
+    text-align: center;
+}
+.title-last-sales span{
+    opacity: 0.7;
+}
+
+.division_last_sales {
+    width: 20px;
+    height: 20px;
+    color: red;
+}
+
+.table-historic-sells {
+    width: 100%;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.table-historic-sells th {
+    border-bottom: 2px solid var(--dark-blue);
+}
+
+#columnchart_values {
+    width: 70%;
+    height: 100%;
+}
