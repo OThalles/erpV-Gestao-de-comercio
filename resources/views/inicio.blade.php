@@ -6,14 +6,31 @@
 
 @section('content')
 <div class="home-container">
+    <div class="dashboard-container"></div>
     <div class="dashboard-item sell">
         <h2>Vendas hoje:</h2>
+        <h3>{{$vendastoday}}</h3>
+        <h2>Itens Vendidos:</h2>
+        <h3>34</h3>
     </div>
     <div class="dashboard-item products">
-        <h2>Produtos disponíveis</h2>
+        <h2>Produtos Disponíveis</h2>
+        <h3>{{$productsAvailable}}</h3>
+            <h3>{{$vendasMonth}}</h3>
+
     </div>
 
     <div>
+
+    </div>
+    <div class="dashboard-item bestsellers">
+        <div class="filters_graphics">
+
+    </div>
+        <div class="graphic-vendas-area">
+            <canvas id="myChart"></canvas>
+        </div>
+
 
     </div>
     <div class="dashboard-item historic-sell">
@@ -25,53 +42,19 @@
         <table class="table-historic-sells">
             <tr>
               <th>Horário</th>
+              <th>Cliente</th>
               <th>Quantia de itens</th>
               <th>Valor total</th>
             </tr>
+            @foreach($vendaslast as $last)
             <tr>
-              <td>10:30</td>
-              <td>N itens</td>
+              <td>{{$last['created_at']}}</td>
+              <td>{{$last['client']}}</td>
+              <td>{{$last['quantity_products']}}</td>
+              <td>{{$last['amount']}}</td>
             </tr>
-            <tr>
-                <td>10:30</td>
-                <td>N itens</td>
-              </tr>
+            @endforeach
 
-              <tr>
-                <td>10:30</td>
-                <td>N itens</td>
-              </tr>
-
-              <tr>
-                <td>10:30</td>
-                <td>N itens</td>
-              </tr>
-
-              <tr>
-                <td>10:30</td>
-                <td>N itens</td>
-              </tr>
-
-              <tr>
-                <td>10:30</td>
-                <td>N itens</td>
-              </tr>
-
-
-              <tr>
-                <td>10:30</td>
-                <td>N itens</td>
-              </tr>
-
-              <tr>
-                <td>10:30</td>
-                <td>N itens</td>
-              </tr>
-
-              <tr>
-                <td>10:30</td>
-                <td>N itens</td>
-              </tr>
 
 
 
@@ -79,7 +62,7 @@
     </div>
 
     <div class="dashboard-item graphic-sell">
-        <div id="columnchart_values"></div>
+        <canvas id="myChartbestsellers"></canvas>
     </div>
 
 </div>
@@ -88,7 +71,8 @@
 
 @section('footer')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="{{asset('assets/js/dashboard-script.js') }}"></script>
     <script src="{{asset('assets/js/charts.js') }}"></script>
 @endsection

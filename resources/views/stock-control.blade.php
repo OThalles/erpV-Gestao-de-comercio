@@ -11,10 +11,14 @@
     <div class="default-box">
 
         <div class="alter-product">
-            <div class="secondary-warn" style="margin-bottom: 10px;">Certifique-se de que você selecionou a ação correta (Adicionar Produto/Adicionar Estoque).</div>
+            <div class="secondary-warn-container">
+                <div class="secondary-warn" style="margin-bottom: 10px;">Certifique-se de que você selecionou a ação correta (Adicionar Produto/Adicionar Estoque).</div>
+            </div>
             <div class="options-stock-container">
-                <div class="selectstock-1 select">Adicionar Produto</div>
-                <div class="selectstock-2 inactive select">Adicionar ESTOQUE</div>
+                <div class="box-options-stock">
+                    <div class="selectstock-1 select">Adicionar Produto</div>
+                    <div class="selectstock-2 inactive select">Adicionar ESTOQUE</div>
+                </div>
             </div>
             <div class="box-found-items-add">
 

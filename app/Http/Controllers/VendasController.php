@@ -11,8 +11,13 @@ use Illuminate\Http\Request;
 
 class VendasController extends Controller
 {
+    protected $user;
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::User();
+            return $next($request);
+        });
+
     }
 
     public function home() {
@@ -22,9 +27,8 @@ class VendasController extends Controller
     }
 
     public function finalizeSale(Request $r) {
-        $checkLogin = Auth::User();
 
-        $data = ['made_by' => $checkLogin->id, 'quantity_products' => $r->quantity_products, 'amount'=> $r->amount];
+        $data = ['made_by' => $this->user->id, 'quantity_products' => $r->quantity_products, 'amount'=> $r->amount];
         $newSale = Venda::create($data);
 
         header('Content-Type: application/json');
@@ -33,7 +37,6 @@ class VendasController extends Controller
     }
 
     public function insertSoldProduct(Request $r) {
-        $user = Auth::User();
         $idProducts = explode(',', $r->produtos);
         //Converter os ids da array para inteiro.
         $mappedIds = array_map(function($s){
@@ -42,10 +45,14 @@ class VendasController extends Controller
 
         $finalData = [];
         $ProdutosVendidos = Produto::findMany($mappedIds);
+
+        $updateQt_Vendas = Produto::where('user_id', $this->user->id)->whereIn('id', $mappedIds)->increment('qt_vendas', 1);
+        
+        $updateQuantity = Produto::where('user_id', $this->user->id)->whereIn('id', $mappedIds)->decrement('quantity', 1);
         foreach($ProdutosVendidos as $produto) {
             $finalData[] =
             [
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
             'venda_id' => $r->venda_id,
             'produto_id' => $produto['identification_number'],
             'name' => $produto['name'],
@@ -68,8 +75,7 @@ class VendasController extends Controller
     }
 
     public function listAllVendas() {
-        $user = Auth::User();
-        $vendas = Venda::with(['user:id,name'])->where('made_by', '=', $user->id)->orderBy('created_at', 'desc')->paginate(15);
+        $vendas = Venda::with(['user:id,name'])->where('made_by', '=', $this->user->id)->orderBy('created_at', 'desc')->paginate(15);
 
         return $vendas;
     }

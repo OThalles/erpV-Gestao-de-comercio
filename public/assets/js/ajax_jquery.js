@@ -3,8 +3,7 @@ var produto = [];
 
 buttonFinish = document.querySelector('.default-button-1')
 buttonFinish.addEventListener('click', function(){
-    document.querySelector('.pop-up').style.display = 'flex'
-    return
+
     let count = document.querySelector('.count-product').textContent
     let amount = document.querySelector('.total-price').textContent
     let amountFormatted = amount.slice(3).replace(/,/g, ".")
@@ -36,7 +35,7 @@ buttonFinish.addEventListener('click', function(){
                 .then(function(res){ return res.json(); })
                 .then((data => {
                     console.log("Foi");
-                    window.location.href = "/";
+                    window.location.href = "/nova-venda";
                 }))
 
             }))

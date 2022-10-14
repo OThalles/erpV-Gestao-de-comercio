@@ -30,14 +30,15 @@ body a {
     width: 10vw;
     height: 100vh;
     position: fixed;
-
+    background-color: #4361ee;
+    background-color: var(--white);
 
 }
 
 .menu {
     display:flex;
     justify-content: center;
-    height: 100vh;
+    height: 110vh;
     width: 10vw;
     background-color: #4361ee;
 
@@ -61,10 +62,11 @@ body a {
 
 .menu-options ul li{
 
-    margin-bottom: 10px;
+
     padding-top: 5px;
     padding-bottom: 5px;
     list-style: none;
+    color: #fff;
     font-weight:bold;
 
 
@@ -81,7 +83,7 @@ body a {
     color: #fff;
 }
 
-.menu-options ul a li:hover {
+.menu-options ul a li:hover, .menu-options ul li:hover {
     background-color: var(--snow-color);
     color: #219EBC;
 }
@@ -92,7 +94,8 @@ body a {
 }
 
 .menu-options ul a li.active {
-    background-color: red;
+    background-color: #fff;
+    color: #219EBC;
 }
 .mobile-menu {display: none; cursor: pointer}
 
@@ -101,8 +104,27 @@ body a {
 
 }
 
+.stock-control {
+    cursor: pointer;
+}
+
 .logged-user {
     padding: 10px;
     text-align: center;
 }
 
+.submenu li{
+    -webkit-animation: mostrar 0.4s;
+    background-color: #7e96ff;
+}
+.submenu li span {
+    color: #000;
+}
+
+@-webkit-keyframes mostrar {
+    from { opacity: 0; margin-top: -20px}
+    to { opacity: 1; margin: 0px;}
+}
+.hidden {
+    display: none;
+}

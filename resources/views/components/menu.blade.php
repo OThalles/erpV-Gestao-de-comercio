@@ -21,10 +21,18 @@
                     <img src="{{asset('assets/icons/shop_icon.png')}}" alt=""> <span>Frente de Caixa</span>
                 </li>
             </a>
-            <a href="{{url('products/stock-control')}}">
-                <li class="{{ (request()->is('stock-control')) ? 'active' : '' }}">
+
+                <li class="stock-control {{ (request()->is('stock-control')) ? 'active' : '' }}">
                     <img src="{{asset('assets/icons/stock-control-icon.png')}}" alt=""> <span>Controle de estoque</span>
-                </li></a>
+                </li>
+                <a href="{{url('products/stock-control')}}" class="submenu stock hidden" style="background-color: #fff;">
+                    <li class="{{ (request()->is('stock-control')) ? 'active' : '' }}">
+                         <span>Adicionar Produto</span>
+                    </li></a>
+                    <a href="{{url('products/stock-control')}}" class="submenu stock hidden">
+                        <li class="{{ (request()->is('stock-control')) ? 'active' : '' }}">
+                         <span>Adicionar Estoque</span>
+                        </li></a>
             <a href="{{url('products')}}">
                 <li class="{{ (request()->is('products')) ? 'active' : '' }}">
                     <img src="{{asset('assets/icons/stock-control-icon.png')}}" alt=""> <span>Produtos</span>

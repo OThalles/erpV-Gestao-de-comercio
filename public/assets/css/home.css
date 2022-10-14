@@ -1,17 +1,22 @@
+body {
+    height: 100%;
+}
+
 .home-container {
     font-family: 'Poppins';
     left: 10vw;
     position:relative;
     display: grid;
-    grid-template-columns: 30% 30%;
-    grid-template-rows: 20% 20%;
+    grid-template-columns: 30% 20% 40%;
+    grid-template-rows: 15% 40% 30%;
     grid-template-areas:
-    "sell products "
-    "historic-sell graphic-sell ";
+    "sell sell products"
+    "best-sellers best-sellers best-sellers "
+    "historic-sell historic-sell graphic-sell ";
     gap: 20px;
     width: 90vw;
     height: 100%;
-    background: linear-gradient(287.56deg, #437DE2 0%, #16F9C1 100%);
+    background: #415a77;
 }
 
 @media (max-width: 850px) {
@@ -30,16 +35,16 @@
 
 .dashboard-item.sell {
     grid-area: sell;
-    width: 100%;
+    width: 50%;
     flex-wrap: wrap;
     text-align: center;
     display: flex;
     align-items:center;
     flex-direction:column;
-    height: 200px;
-    border: 3px solid #49b6ff;
+    height: 150px;
+    border: 3px solid #fff;
     box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
-    background-color: rgba(73, 182, 255);
+    background-color: #fff;
     border-radius: 6px;
 }
 
@@ -54,14 +59,13 @@
     flex-direction:column;
     height: 150px;
     border-radius: 6px;
-    background-color: #49b6ff;
-    border: 3px solid #49b6ff;
+    background-color: #fff;
+    border: 3px solid #fff;
     box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
 }
-
-.dashboard-item.historic-sell {
-    grid-area: historic-sell;
+.dashboard-item.bestsellers {
+    grid-area: best-sellers;
     font-size: 14px;
     width: 100%;
     display: flex;
@@ -70,7 +74,18 @@
     height: 400px;
     background-color: #fff;
     border-radius: 6px;
-    border: 3px solid #49b6ff;
+    box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
+}
+.dashboard-item.historic-sell {
+    grid-area: historic-sell;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    flex-direction:column;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 6px;
     box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
 }
 
@@ -79,17 +94,19 @@
     width: 100%;
     display: flex;
     align-items:center;
+    background-color: #fff;
     flex-direction:column;
-    height: 500px;
+    height: 350px;
     border-radius: 6px;
-    border: 3px solid #49b6ff;
     box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
 }
 
 .dashboard-item.products h2 {
     font-size: 100%;
+    opacity: 0.6;
 }
 .dashboard-item.sell h2 {
+    opacity: 0.6;
     font-size: 100%;
 }
 
@@ -119,4 +136,14 @@
 #columnchart_values {
     width: 70%;
     height: 100%;
+}
+
+
+.filter_graphics {
+    display: flex;
+}
+
+.graphic-vendas-area {
+    width: 100%;
+    height:100%;
 }

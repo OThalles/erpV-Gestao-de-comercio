@@ -13,3 +13,10 @@ document.querySelector('.menu-options ul li').addEventListener('click', function
 })
 
 document.querySelector('.submenu')
+
+
+document.querySelector('.stock-control').addEventListener('click', function(){
+    submenus = document.querySelectorAll('.submenu').forEach(item=>{
+        item.classList.remove('hidden')
+    })
+})

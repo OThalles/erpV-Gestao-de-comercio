@@ -15,7 +15,7 @@
     <div class="box-nova-venda">
         <div class="container-insert">
             <div class="top-buttons">
-                <div class="default-button-1"><a href="">Finalizar venda</a></div>
+                <div class="default-button-1">Finalizar venda</div>
                 <div class="default-button-2">Nova Venda</div>
             </div>
         <div class="insert-product">

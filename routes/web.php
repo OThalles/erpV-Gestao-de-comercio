@@ -58,3 +58,7 @@ Route::get('/contas/editstatus/{id?}/{status?}', [ContasController::class, 'edit
 Route::get('/contas/add', [ContasController::class, 'add'])->name('addInvoiceScreen')->middleware('auth');
 Route::post('/contas/add/action', [ContasController::class, 'addAction'])->name('addInvoice')->middleware('auth');
 
+Route::prefix('dashboard')->group(function() {
+    Route::get('/get-best-sellers', [DashboardController::class, 'getBestSellers'])->middleware('auth');
+
+});
