@@ -78,12 +78,13 @@ body {
 }
 .dashboard-item.historic-sell {
     grid-area: historic-sell;
-    font-size: 14px;
+    font-size: 2vh;
     width: 100%;
     display: flex;
     align-items:center;
     flex-direction:column;
-    height: 350px;
+    height: 420px;
+    overflow-y: auto;
     background-color: #fff;
     border-radius: 6px;
     box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
@@ -125,14 +126,18 @@ body {
 
 .table-historic-sells {
     width: 100%;
+
     border-radius: 4px;
-    text-align: center;
 }
 
 .table-historic-sells th {
     border-bottom: 2px solid var(--dark-blue);
 }
 
+.table-historic-sells tr {
+    text-align: center;
+    font-size: 12px;
+}
 #columnchart_values {
     width: 70%;
     height: 100%;

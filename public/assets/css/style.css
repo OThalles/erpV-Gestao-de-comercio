@@ -9,6 +9,7 @@
 :root {
     --dark-blue: #1d3557;
     --blue: #219EBC;
+    --intense-blue: #0d6efd;
     --blue-clean: #4cc9f0;
     --light-blue: #8ECAE6;
     --snow-color: #edf6f9;
@@ -126,7 +127,7 @@ body {
     padding: 8px;
     cursor: pointer;
     background-color: #198754;
-    color: #fff;
+    color: var(--white);
     text-align: center;
     border: 0;
     width: 10%;
@@ -134,14 +135,14 @@ body {
 
 }
 .default-button-1 a:visited {
-    color: #fff;
+    color: var(--white);
 }
 
 .default-button-2 {
     cursor: pointer;
     padding: 8px;
-    background-color: #0d6efd;
-    color: #fff;
+    background-color: var(--intense-blue);
+    color: var(--white);
     text-align: center;
     width: 10%;
     border: 0;
@@ -162,7 +163,7 @@ body {
     border: 1px solid #000;
 }
 .inactive:hover {
-    background-color: #0d6efd;
+    background-color: var(--intense-blue);
     color: var(--snow-color);
 }
 
@@ -205,12 +206,12 @@ body {
     border-radius: 7px;
     border: 1px solid red;
     position: absolute;
-    background-color: #FFF;
+    background-color: var(--white);
     text-align: center;
 }
 
 .search-container {
-    background-color: #fff;
+    background-color: var(--white);
     width: 90%;
     border-radius: 7px 7px 0px 0px;
     height: 40px;
@@ -237,10 +238,10 @@ body {
     border:0;
     padding: 0;
     outline: 0;
-    background-color: #fff;
+    background-color: var(--white);
 }
 .search-btn {
-    background-color: #0d6efd;
+    background-color: var(--intense-blue);
     width:50px;
     height: 35px;
     display: flex;
@@ -259,8 +260,12 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+.nova-venda {
+    max-height: 200px;
+}
 .table-products table {
-    background-color: #fff;
+    background-color: var(--white);
     border-top: 1px solid black;
     width: 90%;
     border-collapse: collapse;
@@ -371,7 +376,7 @@ table::-webkit-scrollbar-thumb {
 .change-product {
     padding: 8px;
     background-color: #fb8500;
-    color: #fff;
+    color: var(--white);
     text-align: center;
     width: 10%;
     border-radius: 4px;
@@ -395,7 +400,7 @@ table::-webkit-scrollbar-thumb {
 }
 
 .add-stock-box{
-    display: none;
+    display: block;
     height: 50vh;
 }
 
@@ -474,7 +479,7 @@ color: red;
     border-radius: 7px 7px 0px 0px;
     justify-content: center;
     background-color: #0B8FF9;
-    color: #fff;
+    color: var(--white);
 }
 
 .options-stock-container {
@@ -492,9 +497,11 @@ color: red;
 .select {
 padding: 5px;
 width: 20%;
-background-color: #fff;
+background-color: var(--white);
 }
 
 .select:hover {
     background-color: #fb8500;
 }
+
+

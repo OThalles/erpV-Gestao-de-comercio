@@ -96,11 +96,16 @@ body a {
 .menu-options ul a li.active {
     background-color: #fff;
     color: #219EBC;
+
 }
 .mobile-menu {display: none; cursor: pointer}
 
 @media (max-width: 850px) {
     .mobile-menu {display: block;}
+    .menu{
+        width: 100vw;
+    }
+    .menu-options ul li {width: 100vw;}
 
 }
 
@@ -122,9 +127,13 @@ body a {
 }
 
 @-webkit-keyframes mostrar {
-    from { opacity: 0; margin-top: -20px}
-    to { opacity: 1; margin: 0px;}
+    from { opacity: 0; margin-top: -20px }
+    to { opacity: 1; margin: 0px; }
 }
+
+
 .hidden {
     display: none;
+    transition: .3s;
+    pointer-events: none;
 }

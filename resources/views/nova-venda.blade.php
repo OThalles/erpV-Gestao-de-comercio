@@ -15,13 +15,11 @@
     <div class="box-nova-venda">
         <div class="container-insert">
             <div class="top-buttons">
-                <div class="default-button-1">Finalizar venda</div>
-                <div class="default-button-2">Nova Venda</div>
+                <div class="default-button-2">Finalizar Venda</div>
             </div>
+
         <div class="insert-product">
             @csrf
-            <input type="text" class="product-form" name="" id="" placeholder="Insira o código do produto">
-
         </div>
         <div class="warnerror"></div>
         <div class="warn"></div>
@@ -32,7 +30,21 @@
             </div>
         </div>
     </div>
-        <div class="table-products">
+    <div class="campos-search">
+        <div class="search-container">
+
+                <div class="search-bar">
+                <input type="text" class="product-form" name="" id="" placeholder="Insira o código do produto">
+
+                <a href="" class="search-btn">
+
+                    <img  class="loupe-white" src="{{asset('assets/icons/loupe-white.svg')}}" alt="">
+                </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="table-products nova-venda">
             <table class="p">
                 <tr>
                     <th>Cód</th>
@@ -48,7 +60,7 @@
         <table class="final-new-sale-box">
             <tr>
                 <th>Produtos</th>
-                <th>Preço final</th>
+                <th>Valor Total</th>
             </tr>
             <tr>
                 <td class="count-product">0</td>

@@ -23,10 +23,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'home'])->name('main')->middleware('auth');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/signin', [LoginController::class, 'signin'])->name('signin');
+
 Route::post('/auth', [LoginController::class, 'auth'])->name('auth.user');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('products')->group(function() {
-    Route::get('/stock-control', [StockController::class, 'stock'])->middleware('auth');
+    Route::get('/add-product', [StockController::class, 'newproduct'])->middleware('auth');
+    Route::get('/add-stock', [StockController::class, 'newstock'])->middleware('auth');
     Route::get('/', [ProdutosController::class, 'products'])->name('products')->middleware('auth');
     Route::get('/edit-product/{id?}', [ProdutosController::class, 'editProduct'])->name('edit-product')->middleware('auth');
     Route::get('/delete-product/{id?}', [ProdutosController::class, 'deleteProduct'])->middleware('auth');
@@ -60,5 +63,6 @@ Route::post('/contas/add/action', [ContasController::class, 'addAction'])->name(
 
 Route::prefix('dashboard')->group(function() {
     Route::get('/get-best-sellers', [DashboardController::class, 'getBestSellers'])->middleware('auth');
+    Route::get('/get-last-days', [DashboardController::class, 'lastDaysVendas'])->middleware('auth');
 
 });

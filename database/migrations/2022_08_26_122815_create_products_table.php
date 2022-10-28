@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name')->nullable(False);
             $table->string('price', 100)->nullable(False);
             $table->integer('quantity')->nullable(False);
-            $table->unsignedBigInteger('qt_vendas')->nullable(False);
+            $table->unsignedBigInteger('qt_vendas')->default(0)->nullable(False);
             $table->timestamps();
         });
     }

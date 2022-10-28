@@ -9,14 +9,16 @@
     <div class="dashboard-container"></div>
     <div class="dashboard-item sell">
         <h2>Vendas hoje:</h2>
-        <h3>{{$vendastoday}}</h3>
-        <h2>Itens Vendidos:</h2>
-        <h3>34</h3>
+        <h3>cringe</h3>
+        <hr/>
     </div>
     <div class="dashboard-item products">
         <h2>Produtos Disponíveis</h2>
         <h3>{{$productsAvailable}}</h3>
-            <h3>{{$vendasMonth}}</h3>
+        <hr/>
+        <h2>Estoque total disponível</h2>
+        <h3>{{$AllStock}}</h3>
+
 
     </div>
 
@@ -51,7 +53,7 @@
               <td>{{$last['created_at']}}</td>
               <td>{{$last['client']}}</td>
               <td>{{$last['quantity_products']}}</td>
-              <td>{{$last['amount']}}</td>
+              <td>R$ {{$last['amount']}}</td>
             </tr>
             @endforeach
 

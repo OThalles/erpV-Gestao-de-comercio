@@ -11,9 +11,13 @@ use App\Models\Produto;
 class StockController extends Controller
 {
 
-    public function stock() {
+    public function newstock() {
 
-        return view('stock-control', ['user' => Auth::User()]);
+        return view('add-stock', ['user' => Auth::User()]);
+    }
+    public function newproduct() {
+
+        return view('add-product', ['user' => Auth::User()]);
     }
 
     public function addStock(Request $r) {
@@ -42,10 +46,17 @@ class StockController extends Controller
             'identification_number' => $r->identification_number,
             'name' => $r->name,
             'price' => $r->price,
+            'qt_vendas' => 0,
             'quantity' => $r->quantity
     ];
+        try {
+            $insertProduct = Produto::create($data);
+            $warningLog = 'Adicionou o produto '.$r->name.' com '.$r->quantity.' unidades iniciais';
+            LogController::newLog($warningLog);
+        } catch (Exception $e) {
+            echo 'Ocorreu um erro';
+        }
 
-        $insertProduct = Produto::create($data);
         header('Content-Type: application/json');
         return $insertProduct;
     }

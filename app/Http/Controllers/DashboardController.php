@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Venda;
 use App\Models\Produto;
+use App\Models\ProdutoVendido;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -28,7 +31,8 @@ class DashboardController extends Controller
             'vendaslast' => $this->getVendasLast(),
             'productsAvailable' => $this->getProductsAvailable(),
             'bestSellers' => $this->getBestSellers(),
-            'vendasMonth' => $this->getVendasMonth()
+            'vendasMonth' => $this->getCountVendasMonth(),
+            'AllStock' => $this->getAllStock()
         ]);
     }
 
@@ -44,14 +48,46 @@ class DashboardController extends Controller
         return $venda;
     }
 
-    private function getVendasMonth() {
+    private function getCountVendasMonth() {
         $actualMonth = date('m');
-        $vendasMonth = Venda::where('made_by', '=', $this->user->id)->whereMonth('created_at', '=', $actualMonth)->count();
+        $vendasMonth = Venda::where('made_by', '=', $this->user->id)->whereMonth('created_at', '=', $actualMonth)->get();
         return $vendasMonth;
+    }
+
+    public function LastDaysVendas(Request $r) {
+        $array = [];
+        $days = [];
+        $hj = date('Y-m-d');
+        $lastDaysDate = date('Y-m-d', strtotime("-30 days", strtotime($hj)));
+        $todayDate = date('Y-m-d', strtotime("+1 days", strtotime($hj)));
+        $venda = ProdutoVendido::where('user_id', '=', $this->user->id)->whereBetween('created_at', [
+            $lastDaysDate,
+            $todayDate])
+            ->get();
+
+        // foreach($venda as $items) {
+        //     $days[] =
+        //         \Carbon\Carbon::parse($items->created_at)->format('d');
+
+        // }
+
+        //$produto = DB::select(DB::raw("SELECT created_at, COUNT(*) FROM produto_vendidos GROUP BY DAY(created_at)"));
+        $produtodois = DB::table('produto_vendidos as w')
+                            ->select(array(DB::raw('count(*) as Day_count'),DB::raw('DATE(w.created_at) day')))
+                            ->groupBy('day')
+                            ->orderBy('w.created_at')
+                            ->get()
+                            ->take(3);
+        return json_encode($produtodois);
     }
 
     private function getProductsAvailable() {
         $produto = Produto::all()->count();
+        return $produto;
+    }
+
+    private function getAllStock() {
+        $produto = Produto::all()->sum('quantity');
         return $produto;
     }
 

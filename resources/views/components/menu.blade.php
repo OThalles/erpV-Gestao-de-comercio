@@ -25,11 +25,11 @@
                 <li class="stock-control {{ (request()->is('stock-control')) ? 'active' : '' }}">
                     <img src="{{asset('assets/icons/stock-control-icon.png')}}" alt=""> <span>Controle de estoque</span>
                 </li>
-                <a href="{{url('products/stock-control')}}" class="submenu stock hidden" style="background-color: #fff;">
+                <a href="{{url('products/add-product')}}" class="submenu addproduct stock hidden" style="background-color: #fff;">
                     <li class="{{ (request()->is('stock-control')) ? 'active' : '' }}">
                          <span>Adicionar Produto</span>
                     </li></a>
-                    <a href="{{url('products/stock-control')}}" class="submenu stock hidden">
+                    <a href="{{url('products/add-stock')}}" class="submenu addstock stock hidden">
                         <li class="{{ (request()->is('stock-control')) ? 'active' : '' }}">
                          <span>Adicionar Estoque</span>
                         </li></a>

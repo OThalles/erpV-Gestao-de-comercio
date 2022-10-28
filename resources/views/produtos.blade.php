@@ -10,11 +10,7 @@
 
     <div class="default-box">
 
-
             <div class="box-found-items-find">
-
-
-
                 <div class="campos-search">
                     <div class="search-container">
                         <form action="{{route('found-products')}}" method="GET">
@@ -53,12 +49,6 @@
                         @endforeach
 
                     </table>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
 
             </div>
             <div class="paginate">

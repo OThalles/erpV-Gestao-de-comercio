@@ -10,7 +10,6 @@
 
     <div class="default-box">
 
-
             <div class="box-found-items-find">
                 <div class="campos-product">
                     <form action="{{route('found-products')}}" method="GET">
@@ -26,7 +25,6 @@
                             <th>Quantidade</th>
                             <th>Ação</th>
                         </tr>
-
 
                         <tr>
                             <td>{{$data['identification_number']}}</td>

@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     public function login() {
-
         return view('login');
+    }
+
+    public function signin() {
+        return view('sign-in');
     }
 
     public function loginApi(Request $request) {

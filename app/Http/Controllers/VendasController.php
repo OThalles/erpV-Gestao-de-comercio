@@ -8,6 +8,7 @@ use App\Models\ProdutoVendido;
 use App\Models\Produto;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VendasController extends Controller
 {
@@ -37,28 +38,36 @@ class VendasController extends Controller
     }
 
     public function insertSoldProduct(Request $r) {
-        $idProducts = explode(',', $r->produtos);
+        $idProducts = json_decode($r->produtos, TRUE);
+        $AllProducts = [];
+
+        foreach($idProducts as $key => $c) {
+            $updateDataProduct = Produto::where('user_id', $this->user->id)->where('identification_number',$key);
+            $updateDataProduct->increment('qt_vendas', $c);
+            $updateDataProduct->decrement('quantity', $c);
+            $AllProducts[] = $key;
+
+        }
         //Converter os ids da array para inteiro.
-        $mappedIds = array_map(function($s){
-            return intval($s);
-        },$idProducts);
-
         $finalData = [];
-        $ProdutosVendidos = Produto::findMany($mappedIds);
+        $ProdutosVendidos = Produto::whereIn('identification_number', $AllProducts)->get();
 
-        $updateQt_Vendas = Produto::where('user_id', $this->user->id)->whereIn('id', $mappedIds)->increment('qt_vendas', 1);
-        
-        $updateQuantity = Produto::where('user_id', $this->user->id)->whereIn('id', $mappedIds)->decrement('quantity', 1);
+
+        //$updateQt_Vendas = Produto::where('user_id', $this->user->id)->whereIn('identification_number', $mappedIds)->('qt_vendas', 1);
+
+        //$updateQuantity = Produto::where('user_id', $this->user->id)->whereIn('identification_number', $mappedIds)->decrement('quantity', 1);
         foreach($ProdutosVendidos as $produto) {
             $finalData[] =
             [
-            'user_id' => $this->user->id,
-            'venda_id' => $r->venda_id,
-            'produto_id' => $produto['identification_number'],
-            'name' => $produto['name'],
-            'value' =>$produto['price'],
-            'created_at' => new \DateTime(),
-            'updated_at' => new \DateTime()
+                'user_id' => $this->user->id,
+                'venda_id' => $r->venda_id,
+                'produto_id' => $produto['identification_number'],
+                'name' => $produto['name'],
+                'value' =>$produto['price'],
+                'quantity' => $idProducts[$produto['identification_number']],
+                'created_at' => new \DateTime(),
+                'updated_at' => new \DateTime(),
+                'hash' => md5(time() . rand(0, 9999) . time())
             ];
 
         }
@@ -80,3 +89,6 @@ class VendasController extends Controller
         return $vendas;
     }
 }
+
+
+

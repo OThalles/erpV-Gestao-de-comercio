@@ -6,7 +6,7 @@
         <div class="auth-container">
             <div class="auth-box">
                 <form action="{{route('auth.user')}}" method="POST">
-                    <h1>Faça Login</h1>
+                    <h1>Cadastre-se</h1>
                     <hr>
                         @csrf
                         @if ($errors->any())
@@ -19,6 +19,9 @@
                         {{session('danger')}}
                         @endif
                     <div class="inputs-auth">
+                    <div class="inputs-auth">
+                        <p>Nome *:</p>
+                    <input type="text" name="name" autocomplete="off" placeholder="Digite seu nome">
                         <p>Email *:</p>
                     <input type="text" name="email" autocomplete="off" placeholder="Insira aqui seu e-mail">
                         <p>Senha *:</p>
@@ -28,9 +31,9 @@
                         data-sitekey="{{config('services.recaptcha.key')}}">
                     </div>
                     @endif
+                    <br/>
                     <button>Fazer Login</button>
                     </div>
-
                 </form>
             </div>
         </div>

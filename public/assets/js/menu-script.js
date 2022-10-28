@@ -3,20 +3,35 @@ function closeSearch(){
     document.removeEventListener('click', closeSearch)
 }
 
-document.querySelector('.menu-options ul li').addEventListener('click', function(){
-    document.querySelector('.menu-container').style.height = '35vh';
-    document.querySelector('.menu-options').style.width = '100vw';
+let show_menu_mobile = false;
 
-    setTimeout(()=>{
-        document.addEventListener('click', closeSearch);
-    },400)
+document.querySelector('.menu-options ul li').addEventListener('click', function(){
+    let menucontainer = document.querySelector('.menu-container')
+    if(show_menu_mobile==false) {
+        menucontainer.style.height = '100vh';
+        show_menu_mobile = true
+    } else {
+        menucontainer.style.height = '5vh';
+        show_menu_mobile = false;
+    }
+
 })
 
-document.querySelector('.submenu')
 
+
+
+let show_submenus = false;
 
 document.querySelector('.stock-control').addEventListener('click', function(){
-    submenus = document.querySelectorAll('.submenu').forEach(item=>{
-        item.classList.remove('hidden')
-    })
+    let submenu_addproduct = document.querySelector('.addproduct')
+    let submenu_addstock = document.querySelector('.addstock')
+    if(show_submenus==false) {
+        submenu_addproduct.classList.remove('hidden')
+        submenu_addstock.classList.remove('hidden')
+        show_submenus = true
+    } else {
+        submenu_addproduct.classList.toggle('hidden')
+        submenu_addstock.classList.toggle('hidden')
+        show_submenus = false
+    }
 })

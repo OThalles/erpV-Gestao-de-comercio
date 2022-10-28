@@ -1,13 +1,14 @@
 
-var produto = [];
+var produto = {};
 
-buttonFinish = document.querySelector('.default-button-1')
+
+buttonFinish = document.querySelector('.default-button-2')
 buttonFinish.addEventListener('click', function(){
 
     let count = document.querySelector('.count-product').textContent
     let amount = document.querySelector('.total-price').textContent
     let amountFormatted = amount.slice(3).replace(/,/g, ".")
-    if(count > 1) {
+    if(count > 0) {
         data = new FormData();
         console.log(count)
         console.log(amountFormatted)
@@ -23,9 +24,9 @@ buttonFinish.addEventListener('click', function(){
             })
             .then(function(res){ return res.json(); })
             .then((data => {
-
+                //Requisição para finalizar a venda e contabilizar os dados
                 let produtos = new FormData()
-                produtos.append('produtos', produto);
+                produtos.append('produtos', JSON.stringify(produto));
                 produtos.append('venda_id', data.id);
                 fetch('/insertprodutosvendidos', {
                     method: 'POST',
@@ -35,7 +36,7 @@ buttonFinish.addEventListener('click', function(){
                 .then(function(res){ return res.json(); })
                 .then((data => {
                     console.log("Foi");
-                    window.location.href = "/nova-venda";
+                    window.location.href = "/";
                 }))
 
             }))
@@ -47,52 +48,60 @@ buttonFinish.addEventListener('click', function(){
 let countPrice = 0.00
 document.querySelector('.product-form').addEventListener('keyup', function(e) {
     if(e.keyCode == 13) {
+        e.preventDefault()
         codebar = this.value
         this.value = '';
+        //Busca do produto na url, para fazer a listagem na tabela
+
         fetch('api/find-product/'+ codebar)
         .then((response => response.json()))
         .then((responseData => {
             let count = document.querySelector('.count-product');
             if(responseData) {
-            countPrice = countPrice + parseFloat(responseData.price);
-            let numero = parseInt(count.textContent) + 1;
-            produto.push(parseInt(responseData.identification_number))
-            console.log(produto);
-            /**
-             * Criação do produto na tabela;
-             */
-            createProduct = document.createElement('tr')
-            txtCod = document.createTextNode(responseData.identification_number)
-            txtName = document.createTextNode(responseData.name)
-            txtPrice = document.createTextNode(responseData.price)
-            createCod = document.createElement('td')
-            createCod.appendChild(txtCod)
-            createProd = document.createElement('td')
-            createProd.appendChild(txtName)
-            createPrice = document.createElement('td')
-            createPrice.appendChild(txtPrice)
-            createProduct.appendChild(createCod)
-            createProduct.appendChild(createProd)
-            createProduct.appendChild(createPrice)
+                countPrice = countPrice + parseFloat(responseData.price);
+                let numero = parseInt(count.textContent) + 1;
+                //Checando se já tem o produto na lista
+                if(produto.hasOwnProperty(responseData.identification_number) == false) {
+                    produto[responseData.identification_number] = 1
+                } else {
+                    produto[responseData.identification_number] = produto[responseData.identification_number] + 1 || 1
+                }
+                console.log(JSON.stringify(produto));
+                /**
+                 * Criação do produto na tabela;
+                 */
+                createProduct = document.createElement('tr')
+                txtCod = document.createTextNode(responseData.identification_number)
+                txtName = document.createTextNode(responseData.name)
+                txtPrice = document.createTextNode(responseData.price)
+                createCod = document.createElement('td')
+                createCod.appendChild(txtCod)
+                createProd = document.createElement('td')
+                createProd.appendChild(txtName)
+                createPrice = document.createElement('td')
+                createPrice.appendChild(txtPrice)
+                createProduct.appendChild(createCod)
+                createProduct.appendChild(createProd)
+                createProduct.appendChild(createPrice)
 
 
-            document.querySelector(".p").appendChild(createProduct)
-            /**
-             * Função para manter o scroll dos produtos sempre em baixo
-             */
-            el = document.querySelector('.p')
-            var height = el.scrollHeight;
-            el.scrollTop = height;
-            count = count + responseData.price
+                document.querySelector(".p").appendChild(createProduct)
+                /**
+                 * Função para manter o scroll dos produtos sempre em baixo
+                 */
+                el = document.querySelector('.p')
+                var height = el.scrollHeight;
+                el.scrollTop = height;
+                count = count + responseData.price
 
-            document.querySelector('.warnerror').style.display = "none";
+                document.querySelector('.warnerror').style.display = "none";
 
-            let textSubmit = "Produto:"+ responseData.name+" | Preço: "+ responseData.price;
-            document.querySelector('.warn').innerHTML = textSubmit;
-            document.querySelector('.warn').style.display = "block";
+                let textSubmit = "Produto:"+ responseData.name+" | Preço: "+ responseData.price;
+                document.querySelector('.warn').innerHTML = textSubmit;
+                document.querySelector('.warn').style.display = "block";
 
-            document.querySelector('.count-product').innerHTML = numero;
-            document.querySelector('.total-price').innerHTML = countPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.querySelector('.count-product').innerHTML = numero;
+                document.querySelector('.total-price').innerHTML = countPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
             } else {
                 /**
