@@ -73,11 +73,10 @@ class DashboardController extends Controller
 
         //$produto = DB::select(DB::raw("SELECT created_at, COUNT(*) FROM produto_vendidos GROUP BY DAY(created_at)"));
         $produtodois = DB::table('produto_vendidos as w')
-                            ->select(array(DB::raw('count(*) as Day_count'),DB::raw('DATE(w.created_at) day')))
+                            ->select(array(DB::raw('sum(quantity) as Day_count'),DB::raw('DATE(w.created_at) day')))
                             ->groupBy('day')
                             ->orderBy('w.created_at')
-                            ->get()
-                            ->take(3);
+                            ->get();
         return json_encode($produtodois);
     }
 

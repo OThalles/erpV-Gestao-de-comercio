@@ -12,6 +12,8 @@
 
 
             <div class="box-found-items-find">
+                <x-top-buttons tonga='Vendas' routes='addproduct' namebuttons='Novo produto'/>
+                <x-border-table routes='found-products' count="{{count($data)}}"/>
                 <div class="table-products">
                     <table class="p">
                         @if(count($data) > 0)

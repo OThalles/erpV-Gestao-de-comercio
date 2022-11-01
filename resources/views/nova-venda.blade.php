@@ -21,35 +21,24 @@
         <div class="insert-product">
             @csrf
         </div>
-        <div class="warnerror"></div>
-        <div class="warn"></div>
-        <div id="modal-finish" class="modal-container">
-            <div class="pop-up">
-                <p>x</p>
-                <span><b>Tem certeza que quer finalizar essa venda?</b></span>
-            </div>
-        </div>
+        <x-warns/>
+        <x-modal/>
     </div>
     <div class="campos-search">
         <div class="search-container">
 
-                <div class="search-bar">
                 <input type="text" class="product-form" name="" id="" placeholder="Insira o código do produto">
-
-                <a href="" class="search-btn">
-
-                    <img  class="loupe-white" src="{{asset('assets/icons/loupe-white.svg')}}" alt="">
                 </a>
-                </div>
+
 
             </div>
         </div>
         <div class="table-products nova-venda">
             <table class="p">
                 <tr>
-                    <th>Cód</th>
-                    <th>Produto</th>
-                    <th>Preço</th>
+                    <th >Cód</th>
+                    <th >Produto</th>
+                    <th >Preço</th>
                 </tr>
 
 

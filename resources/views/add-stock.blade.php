@@ -27,8 +27,8 @@
 
                             Adicionando estoque
                         </div>
-                        <div class="warn"></div>
-                        <x-input-form title="Código do produto:" class="codadd-stock" name="" placeholder="Código do produto" value='' />
+                        <x-warns/>
+                        <x-input-form title="Código do produto: (Apenas números)" class="codadd-stock" name="" placeholder="Código do produto" value='' />
                         <x-input-form title="Quantidade (Caso não preenchido será aumentado em 1):" class="qtinitadd-stock" name="" placeholder="Quantidade Inicial" value=''/>
 
                         <button class="default-button-2">Enviar</button>

@@ -2,6 +2,7 @@
 @import "home.css";
 @import "auth.css";
 @import "inputs-form.css";
+@import "modal.css";
 
 * {
     margin: 0;
@@ -28,6 +29,7 @@ body {
     flex-direction: column;
     width: calc(100vw - 200px);
     height: 100vh;
+    overflow-x: hidden;
 }
 
 .nova-venda-title {
@@ -75,7 +77,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 90vw;
-    height: 100vh;
+    height: 900px;
     position: relative;
     left: 10vw;
     background-color: #415a77;
@@ -130,7 +132,7 @@ body {
     color: var(--white);
     text-align: center;
     border: 0;
-    width: 10%;
+    width: 20%;
     border-radius: 4px;
 
 }
@@ -140,13 +142,17 @@ body {
 
 .default-button-2 {
     cursor: pointer;
-    padding: 8px;
+    padding: 3px;
     background-color: var(--intense-blue);
     color: var(--white);
     text-align: center;
-    width: 10%;
+    width: 50%;
     border: 0;
     border-radius: 4px;
+}
+
+a .default-button-2  {
+    width: 100%;
 }
 
 
@@ -211,31 +217,22 @@ body {
 }
 
 .search-container {
-    background-color: var(--white);
     width: 90%;
-    border-radius: 7px 7px 0px 0px;
+    display: flex;
+    justify-content:center;
     height: 40px;
 
 
 }
 
-.search-bar {
-    display: flex;
-    justify-content: flex-start;
-    height:  50px;
-
-    border-radius: 7px 7px 0px 0px;
-    background-color: #003566;
-}
-
-.search-bar .product-form {
-
-    border-radius: 7px 0px 0px 7px;
+.product-form {
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
     background: none;
+    border-radius: 12px;
     height: 35px;
     width: 50%;
     font-size: 16px;
-    border:0;
+    border:2px solid #8D99AE;
     padding: 0;
     outline: 0;
     background-color: var(--white);
@@ -245,7 +242,6 @@ body {
     width:50px;
     height: 35px;
     display: flex;
-    border-radius: 0px 10px 10px 0px;
     justify-content: center;
     align-items: center;
 }
@@ -258,22 +254,23 @@ body {
     justify-content: center;
     text-align: center;
     align-items: center;
+    padding-bottom: 50px;
     flex-direction: column;
 }
 
 .nova-venda {
-    max-height: 200px;
+    max-height: 300px;
 }
 .table-products table {
     background-color: var(--white);
     border-top: 1px solid black;
-    width: 90%;
+    width: 95%;
     border-collapse: collapse;
     text-align: center;
     display: block;
-    max-height: 50vh;
+    max-height: 70vh;
+    box-shadow:-1px 1px 5px -1px rgba(0, 0, 0, 0.5);
     overflow-y: scroll;
-    box-shadow:-1px 1px 10px -1px rgba(0, 0, 0, 0.5);
     text-align: center;
 
 }
@@ -286,7 +283,12 @@ table::-webkit-scrollbar-thumb {
 }
 
 .table-products th {
-    color: var(--dark-blue);
+    color: var(--white);
+    background-color: #343a40;
+    font-size: 12px;
+    position: sticky;
+    top: 0;
+    padding: 10px;
 }
 
 .oddelement {
@@ -295,8 +297,8 @@ table::-webkit-scrollbar-thumb {
 
 .table-products td {
     font-size: 14px;
-    padding: 5px;
-    width: 9%;
+    padding: 10px;
+    width: 8%;
     font-family: 'Segoe UI';
 
 }
@@ -338,8 +340,39 @@ table::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #415a77;
+    background-color: #dee2e6;
 
+}
+
+.border-table {
+    background: #fff;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    max-height: 800px;
+    box-shadow:-1px 1px 10px -1px rgba(0, 0, 0, 0.5);
+}
+
+.top-border-table {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+}
+.top-border-table form {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.top-buttons {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .all-products-box {
@@ -391,7 +424,11 @@ table::-webkit-scrollbar-thumb {
 
 
 .box-found-items-find {
-    height: 50vh;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -418,6 +455,7 @@ table::-webkit-scrollbar-thumb {
 
 .warnerror {
     color: #842029;
+    text-align: center;
     background-color: #f8d7da;
     border: 1px solid #f5c2c7;
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable(False);
             $table->unsignedbigInteger('identification_number')->unique();
             $table->string('name')->nullable(False);
-            $table->string('price', 100)->nullable(False);
+            $table->decimal('price', 10,5)->nullable(False);
             $table->integer('quantity')->nullable(False);
             $table->unsignedBigInteger('qt_vendas')->default(0)->nullable(False);
             $table->timestamps();

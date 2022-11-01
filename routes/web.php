@@ -28,7 +28,7 @@ Route::get('/signin', [LoginController::class, 'signin'])->name('signin');
 Route::post('/auth', [LoginController::class, 'auth'])->name('auth.user');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('products')->group(function() {
-    Route::get('/add-product', [StockController::class, 'newproduct'])->middleware('auth');
+    Route::get('/add-product', [StockController::class, 'newproduct'])->name('addproduct')->middleware('auth');
     Route::get('/add-stock', [StockController::class, 'newstock'])->middleware('auth');
     Route::get('/', [ProdutosController::class, 'products'])->name('products')->middleware('auth');
     Route::get('/edit-product/{id?}', [ProdutosController::class, 'editProduct'])->name('edit-product')->middleware('auth');

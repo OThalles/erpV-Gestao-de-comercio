@@ -6,16 +6,16 @@
 
 @section('content')
 <div class="home-container">
+    <div class="home-box">
     <div class="dashboard-container"></div>
     <div class="dashboard-item sell">
         <h2>Vendas hoje:</h2>
         <h3>cringe</h3>
-        <hr/>
     </div>
     <div class="dashboard-item products">
         <h2>Produtos Disponíveis</h2>
         <h3>{{$productsAvailable}}</h3>
-        <hr/>
+
         <h2>Estoque total disponível</h2>
         <h3>{{$AllStock}}</h3>
 
@@ -39,7 +39,7 @@
         <div class="title-last-sales">
             <h2>Histórico de vendas</h2>
             <hr class="division-last-sales">
-            <span>Registro das suas ultimas 13 vendas</span>
+            <span>Registro das suas ultimas vendas</span>
         </div>
         <table class="table-historic-sells">
             <tr>
@@ -67,6 +67,7 @@
         <canvas id="myChartbestsellers"></canvas>
     </div>
 
+</div>
 </div>
 </div>
 @endsection

@@ -19,8 +19,8 @@
                     Adicionando nova conta
                 </div>
                 <div class="warn"></div>
-                <x-input-form title="Nome da conta:" class="amountadd" name="amount" placeholder="Conta á pagar" value='' />
-                <x-input-form title="Código:" class="nameadd" name="name" placeholder="Cód" value=''/>
+                <x-input-form title="Nome da conta:" class="nameadd" name="name" placeholder="Conta á pagar" value='' />
+                <x-input-form-money title="Preço á pagar:" class="priceadd" name="amount" placeholder="Valor" value=''/>
 
                 <button class="default-button-2">Enviar</button>
             </div>

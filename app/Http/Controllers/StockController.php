@@ -21,31 +21,47 @@ class StockController extends Controller
     }
 
     public function addStock(Request $r) {
+        $quantidade = $r->quantity ? $r->quantity:1;
+
         $user = Auth::User();
         $product = Produto::where('user_id', '=', $user->id)->where('identification_number', '=', $r->identification_number)->first();
         if($product) {
-            $product->quantity = $product->quantity + $r->quantity;
+            $product->quantity = $product->quantity + $quantidade;
             $product->save();
+        } else {
         }
-        $warningLog = 'Adicionou '.$r->quantity.' unidades do produto '.$product->name;
-        LogController::newLog($warningLog);
 
         $product = [
             'name' => $product->name,
             'quantity' => $r->quantity
         ];
+        $warningLog = 'Adicionou '.$r->quantity.' unidades do produto '.$product->name;
+        LogController::newLog($warningLog);
+
 
         header('Content-Type: application/json');
         return $product;
     }
 
     public function addProduct(Request $r) {
+        $this->validate($r,[
+            'name' => 'required',
+            'price' => 'required',
+            'identification_number' => 'required',
+            'quantity' => 'required'
+        ],[
+            'name.required' => "É necessário inserir um nome", //Para traduzir o padrao do laravel
+            'price.required' =>"É necessário inserir o preço do produto",
+            'identification_number' => "É necessário o código do produto",
+            'quantity' => "É necessário inserir a quantidade inicial do produto"
+        ]);
+
         $user = Auth::User();
         $data = [
             'user_id' => $user->id,
             'identification_number' => $r->identification_number,
             'name' => $r->name,
-            'price' => $r->price,
+            'price' => str_replace(['.',','],['','.'],$r->price),
             'qt_vendas' => 0,
             'quantity' => $r->quantity
     ];

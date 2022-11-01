@@ -1,6 +1,9 @@
 
 var produto = {};
 
+document.querySelector('.nova-venda').style.display = 'none'
+
+
 
 buttonFinish = document.querySelector('.default-button-2')
 buttonFinish.addEventListener('click', function(){
@@ -44,7 +47,6 @@ buttonFinish.addEventListener('click', function(){
 })
 
 
-
 let countPrice = 0.00
 document.querySelector('.product-form').addEventListener('keyup', function(e) {
     if(e.keyCode == 13) {
@@ -59,6 +61,7 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
             let count = document.querySelector('.count-product');
             if(responseData) {
                 countPrice = countPrice + parseFloat(responseData.price);
+                console.log(countPrice)
                 let numero = parseInt(count.textContent) + 1;
                 //Checando se já tem o produto na lista
                 if(produto.hasOwnProperty(responseData.identification_number) == false) {
@@ -70,6 +73,11 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
                 /**
                  * Criação do produto na tabela;
                  */
+
+
+                 document.querySelector('.nova-venda').style.display = 'flex' //Exibir o cabeçalho da tabela
+
+
                 createProduct = document.createElement('tr')
                 txtCod = document.createTextNode(responseData.identification_number)
                 txtName = document.createTextNode(responseData.name)
@@ -83,7 +91,6 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
                 createProduct.appendChild(createCod)
                 createProduct.appendChild(createProd)
                 createProduct.appendChild(createPrice)
-
 
                 document.querySelector(".p").appendChild(createProduct)
                 /**

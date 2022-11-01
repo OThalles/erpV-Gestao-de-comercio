@@ -42,7 +42,7 @@ class ContasController extends Controller
             'status' => 0
         ];
         $newInvoice = Conta::create($data);
-        return $newInvoice;
+        return redirect()->route('invoice');
     }
 }
 

@@ -20,7 +20,7 @@ class ProdutoFactory extends Factory
             'user_id' => 1,
             'identification_number' => $this->faker->unique()->numberBetween(1, 50),
             'name' => fake()->name(),
-            'price' => '10,00',
+            'price' => '10.00',
             'quantity' => 50,
             'qt_vendas' => 0,
         ];

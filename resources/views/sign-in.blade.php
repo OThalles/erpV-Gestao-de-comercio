@@ -4,10 +4,12 @@
 
 
         <div class="auth-container">
-            <div class="auth-box">
-                <form action="{{route('auth.user')}}" method="POST">
+            <div class="auth">
+                <div class="title">
                     <h1>Cadastre-se</h1>
-                    <hr>
+                    <hr class="center-diamond">
+                </div>
+                <form action="{{route('auth.user')}}" method="POST">
                         @csrf
                         @if ($errors->any())
                         @foreach($errors->all() as $error)
@@ -19,13 +21,12 @@
                         {{session('danger')}}
                         @endif
                     <div class="inputs-auth">
-                    <div class="inputs-auth">
                         <p>Nome *:</p>
-                    <input type="text" name="name" autocomplete="off" placeholder="Digite seu nome">
+                    <input type="text" name="name" autocomplete="off" placeholder="Insira seu nome">
                         <p>Email *:</p>
-                    <input type="text" name="email" autocomplete="off" placeholder="Insira aqui seu e-mail">
+                    <input type="text" name="email" autocomplete="off" placeholder="Insira seu e-mail">
                         <p>Senha *:</p>
-                    <input type="password" name="password" autocomplete="off" placeholder="Insira aqui sua senha">
+                    <input type="password" name="password" autocomplete="off" placeholder="Insira sua senha">
                     @if(config('services.recaptcha.key'))
                     <div class="g-recaptcha"
                         data-sitekey="{{config('services.recaptcha.key')}}">

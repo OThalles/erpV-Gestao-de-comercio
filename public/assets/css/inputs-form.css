@@ -29,6 +29,15 @@
 
 }
 
+.search-input {
+    outline: 0;
+    opacity: 0.5;
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #4a4e69;
+    width: 100%;
+}
+
 .input-form:focus {
     animation: borda 0.4s ease;
     -webkit-animation-fill-mode: forwards;

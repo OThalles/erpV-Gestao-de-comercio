@@ -4,10 +4,13 @@
 
 
         <div class="auth-container">
-            <div class="auth-box">
+
+                <div class="auth">
+                    <div class="title">
+                        <h1>Faça Login</h1>
+                        <hr class="center-diamond">
+                    </div>
                 <form action="{{route('auth.user')}}" method="POST">
-                    <h1>Faça Login</h1>
-                    <hr>
                         @csrf
                         @if ($errors->any())
                         @foreach($errors->all() as $error)
@@ -16,7 +19,7 @@
                         @endif
 
                         @if(session('danger'))
-                        {{session('danger')}}
+                        <span style="color: #FF0000">{{session('danger')}}</span>
                         @endif
                     <div class="inputs-auth">
                         <p>Email *:</p>
@@ -32,7 +35,7 @@
                     </div>
 
                 </form>
-            </div>
+                </div>
         </div>
 
 @endsection

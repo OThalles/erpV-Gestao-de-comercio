@@ -52,7 +52,7 @@ class LoginController extends Controller
             session()->put('user', Auth::User());
             return redirect()->route('main');
         } else{
-            return redirect()->back()->with('danger','Email ou senha inválido');
+            return redirect()->back()->with('danger','Email ou senha inválidos');
         }
     }
 }

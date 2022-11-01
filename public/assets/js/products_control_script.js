@@ -27,15 +27,19 @@ document.querySelector(".add-product-form").addEventListener('submit', async(e)=
         })
         .then(function(res){ return res.json(); })
         .then((data => {
-            let textSubmit = "O produto "+data.name+" foi adicionado com sucesso";
-            document.querySelector('.codadd').value = ''
-            document.querySelector('.nameadd').value = ''
-            document.querySelector('.priceadd').value = ''
-            document.querySelector('.qtinitadd').value = ''
-            document.querySelector('.warn').innerHTML = textSubmit;
-            document.querySelector('.warn').style.display = "block";
-        }))
+                let textSubmit = "O produto "+data.name+" foi adicionado com sucesso";
+                document.querySelector('.codadd').value = ''
+                document.querySelector('.nameadd').value = ''
+                document.querySelector('.priceadd').value = ''
+                document.querySelector('.qtinitadd').value = ''
+                document.querySelector('.warn').innerHTML = textSubmit;
+                document.querySelector('.warn').style.display = "block";
 
+        }))
+        .catch(() => {
+            document.querySelector('.warnerror').innerHTML = "Você precisa preencher todos os campos";
+            document.querySelector('.warnerror').style.display = "flex";
+        })
 })
 
 
