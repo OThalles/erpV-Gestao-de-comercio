@@ -7,47 +7,72 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Produto;
+use Illuminate\Validation\Rule;
+
 
 class ProdutosController extends Controller
 {
+    protected $user;
+    public function __construct() {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::User();
+            return $next($request);
+        });
+
+    }
 
     public function home(Request $request) {
 
-        return view('nova-venda', ['user' => Auth::User()]);
+        return view('nova-venda', ['user' => $this->user]);
     }
 
     public function products() {
         $checkLogin = auth('sanctum')->user();
-        return view('produtos', ['user' => Auth::User(), 'data' => $this->listAllProducts()]);
+        return view('produtos', ['user' => $this->user, 'data' => $this->listAllProducts()]);
     }
 
     private function listAllProducts() {
-        $user = Auth::User();
-        $produto = Produto::where('user_id', '=', $user->id)->paginate(20);
+        $produto = Produto::where('user_id', '=', $this->user->id)->paginate(20);
         return $produto;
     }
 
     public function editProduct(Request $r){
-        $checkLogin = auth('sanctum')->user();
-        $produto = Produto::find($r->id);
-        return view('edit-product', ['user' => Auth::User(), 'produto' => $produto]);
+
+        $produto = Produto::where('user_id', $this->user->id)->where('identification_number',$r->id)->first();
+        return view('edit-product', ['user' => $this->user, 'produto' => $produto]);
     }
 
     public function editAction(Request $r) {
-        $produto = Produto::find($r->identification_number);
         $checkLogin = Auth::User();
         $warningLog = 'Editou o produto '.$r->name;
 
-        if(!empty($r->identification_number) && !empty($r->name) && !empty($r->price) && !empty($r->quantity)) {
-            $produto->identification_number = $r->identification_number;
-            $produto->name = $r->name;
-            $produto->price = $r->price;
-            $produto->quantity = $r->quantity;
-            $produto->save();
+
+        $this->validate($r,[
+            'name' => 'required|min:1|max:255',
+            'price' => 'required',
+
+            'quantity' => 'required|numeric'
+        ],[
+            'name.required' => "É necessário inserir um nome", //Para traduzir o padrao do laravel
+            'name.min' => "O nome precisa ter mais de um caractere",
+            'name.max' => "O nome é muito grande",
+            'price.required' =>"É necessário inserir o preço do produto",
+            'quantity.required' => "É necessário inserir a quantidade inicial do produto",
+            'quantity.numeric' => "A quantidade deve ser um valor numérico"
+        ]);
+
+        if(!empty($r->name) && !empty($r->price) && !empty($r->quantity)) {
+            Produto::where('user_id', $this->user->id)->where('identification_number',$r->identification_number)->update(
+                [
+                 'name' => $r->name,
+                 'price' => str_replace(['.',','],['','.'],$r->price),
+                 'quantity' => $r->quantity
+                ]
+                );
 
             LogController::newLog($warningLog);
 
-            return redirect()->route('products');
+            return redirect()->route('products');;
         } else {
             session()->put('flash', 'Você precisa preencher todos os campos');
             return redirect()->route('edit-product');
@@ -72,7 +97,7 @@ class ProdutosController extends Controller
     }
 
     public function findProduct(Request $request) {
-        $produto = Produto::find($request->identification_number);
+        $produto = Produto::where('user_id', Auth::User()->id)->where('identification_number',$request->identification_number)->first();
         header('Content-Type: application/json');
         echo json_encode($produto);
     }

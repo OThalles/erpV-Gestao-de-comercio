@@ -1,1 +1,1 @@
-<div class="default-button-1">{{$text}}</div>
+<div class="default-button-1 {{$classe}}">{{$text}}</div>

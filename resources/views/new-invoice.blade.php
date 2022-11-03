@@ -19,8 +19,8 @@
                     Adicionando nova conta
                 </div>
                 <div class="warn"></div>
-                <x-input-form title="Nome da conta:" class="nameadd" name="name" placeholder="Conta á pagar" value='' />
-                <x-input-form-money title="Preço á pagar:" class="priceadd" name="amount" placeholder="Valor" value=''/>
+                <x-input-form title="Nome da conta:" class="nameadd" name="name" placeholder="Conta á pagar" value='' validation="name" :readonly="False"/>
+                <x-input-form-money title="Preço á pagar:" class="priceadd" name="amount" placeholder="Valor" value='' validation="price" :readonly="False"/>
 
                 <button class="default-button-2">Enviar</button>
             </div>
@@ -32,5 +32,5 @@
 @endsection
 @section('footer')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="{{asset('assets/js/find_products_ajax.js') }}"></script>
+<script src="{{asset('assets/js/format_money.js') }}"></script>
 @endsection

@@ -19,30 +19,69 @@ buttonFinish.addEventListener('click', function(){
         data.append('amount', amountFormatted);
         data.append('quantity_products', count);
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+                });
 
-            fetch('/finalize-sale', {
-                method: 'POST',
-                headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content') },
-                body: data
-            })
-            .then(function(res){ return res.json(); })
-            .then((data => {
-                //Requisição para finalizar a venda e contabilizar os dados
-                let produtos = new FormData()
-                produtos.append('produtos', JSON.stringify(produto));
-                produtos.append('venda_id', data.id);
-                fetch('/insertprodutosvendidos', {
-                    method: 'POST',
-                    headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content') },
-                    body: produtos
-                })
-                .then(function(res){ return res.json(); })
-                .then((data => {
-                    console.log("Foi");
-                    window.location.href = "/";
-                }))
+            $.ajax({
+                url: "/finalize-sale",
+                type: "POST",
+                data: data,
+                processData: false,
+                contentType: false,
 
-            }))
+            }).done(function(resposta) {
+                    let json = $.parseJSON(resposta);
+                    let produtos = new FormData()
+
+                    produtos.append('produtos', JSON.stringify(produto));
+                    produtos.append('venda_id', json.id);
+
+                    fetch('/insertprodutosvendidos', {
+                        method: 'POST',
+                        headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content') },
+                        body: produtos
+                    })
+                    .then(function(res){ return res.json(); })
+                    .then((data => {
+                        console.log("Foi");
+                        window.location.href = "/";
+                    }))
+
+            }).fail(function(jqXHR, textStatus ) {
+                console.log("Request failed: " + textStatus);
+
+            }).always(function() {
+                console.log("completou");
+            });
+
+
+
+            // fetch('/finalize-sale', {
+            //     method: 'POST',
+            //     headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content') },
+            //     body: data
+            // })
+            // .then(function(res){ return res.json(); })
+            // .then((data => {
+            //     //Requisição para finalizar a venda e contabilizar os dados
+            //     let produtos = new FormData()
+            //     produtos.append('produtos', JSON.stringify(produto));
+            //     produtos.append('venda_id', data.id);
+            //     fetch('/insertprodutosvendidos', {
+            //         method: 'POST',
+            //         headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content') },
+            //         body: produtos
+            //     })
+            //     .then(function(res){ return res.json(); })
+            //     .then((data => {
+            //         console.log("Foi");
+            //         window.location.href = "/";
+            //     }))
+
+            // }))
     }
 })
 
@@ -55,9 +94,18 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
         this.value = '';
         //Busca do produto na url, para fazer a listagem na tabela
 
-        fetch('api/find-product/'+ codebar)
-        .then((response => response.json()))
-        .then((responseData => {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "products/find-product/"+codebar,
+            type: "GET",
+            dataType: "JSON"
+
+        }).done(function(responseData) {
             let count = document.querySelector('.count-product');
             if(responseData) {
                 countPrice = countPrice + parseFloat(responseData.price);
@@ -120,9 +168,14 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
                 document.querySelector('.warnerror').style.display = "block";
             }
 
+        }).fail(function(jqXHR, textStatus ) {
+            console.log("Request failed: " + textStatus);
+
+        }).always(function() {
+            console.log("completou");
+        });
 
 
-        }))
     }
 })
 

@@ -31,15 +31,16 @@ Route::prefix('products')->group(function() {
     Route::get('/add-product', [StockController::class, 'newproduct'])->name('addproduct')->middleware('auth');
     Route::get('/add-stock', [StockController::class, 'newstock'])->middleware('auth');
     Route::get('/', [ProdutosController::class, 'products'])->name('products')->middleware('auth');
+    Route::get('/find-product/{identification_number}', [ProdutosController::class, 'findProduct']);
     Route::get('/edit-product/{id?}', [ProdutosController::class, 'editProduct'])->name('edit-product')->middleware('auth');
     Route::get('/delete-product/{id?}', [ProdutosController::class, 'deleteProduct'])->middleware('auth');
-    Route::get('/edit-products', [ProdutosController::class, 'editAction'])->name('edit.action')->middleware('auth');
+    Route::post('/edit-products', [ProdutosController::class, 'editAction'])->name('edit.action')->middleware('auth');
     Route::post('/add-product', [StockController::class, 'addProduct'])->name('addProduct');
 });
 
 //Actions
 
-Route::get('/add-stock/{identification_number}/{quantity}', [StockController::class, 'addStock']);
+Route::post('/add-stock', [StockController::class, 'addStock']);
 
 
 Route::get('/product/{id?}', [ProdutosController::class, 'foundProducts'])->name('found-products')->middleware('auth');

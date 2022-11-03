@@ -1,5 +1,7 @@
 <span class="form-name">{{$title}}</span>
 <input type="text" class="input-form {{$class}} money" name="{{$name}}"  onKeyUp="mascaraMoeda(this, event)" placeholder="{{$placeholder}}" value="{{$value}}">
+<p class="texterror {{$validation}}_error"></p>
+
 
 <script>
 String.prototype.reverse = function(){

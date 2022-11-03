@@ -90,6 +90,7 @@ body {
     align-items: center;
     width: 90vw;
     height: 100vh;
+    overflow: hidden;
     position: relative;
     left: 10vw;
     background-color: #415a77;
@@ -419,7 +420,7 @@ table::-webkit-scrollbar-thumb {
 
 .alter-product, .add-quantity {
     width: 100%;
-    height: 50vh;
+    height: 100vh;
 }
 
 
@@ -456,8 +457,16 @@ table::-webkit-scrollbar-thumb {
 .warnerror {
     color: #842029;
     text-align: center;
+    display: none;
+    flex-direction:column;
     background-color: #f8d7da;
     border: 1px solid #f5c2c7;
+}
+
+.texterror {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 14px;
+    color: red;
 }
 
 .warn-container {

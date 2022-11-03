@@ -15,9 +15,7 @@ return new class extends Migration
     {
 
         Schema::table('produto_vendidos', function (Blueprint $table) {
-            $table->foreign('produto_id')
-            ->references('identification_number')
-            ->on('produtos');
+
         });
 
     }

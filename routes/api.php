@@ -19,9 +19,8 @@ use App\Http\Controllers\StockController;
 |
 */
 
-Route::get('/find-product/{identification_number}', [ProdutosController::class, 'findProduct']);
 
-    Route::get('/findAllProducts', [ProdutosController::class, 'listAllProducts']);
+Route::get('/findAllProducts', [ProdutosController::class, 'listAllProducts']);
 
 
 Route::prefix('auth')->group(function(){

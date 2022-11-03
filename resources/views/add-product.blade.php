@@ -27,21 +27,11 @@
                         </div>
                         <div class="warnerror"></div>
                         <div class="warn"></div>
-                        @csrf
-                        @if ($errors->any())
-                        @foreach($errors->all() as $error)
-                            <p style="color: #FF0000">{{$error}}</p>
-                        @endforeach
-                        @endif
-
-                        @if(session('danger'))
-                        <span style="color: #FF0000">{{session('danger')}}</span>
-                        @endif
-                        <x-input-form title="Código do produto: (Apenas números)" class="codadd" name="" placeholder="Código do produto" value='' />
-                        <x-button-2 text="Gerar código aleatório"/>
-                        <x-input-form title="Nome do produto:" class="nameadd" name="" placeholder="Nome" value=''/>
-                        <x-input-form-money title="Preço do produto:" class="priceadd" name="amount" placeholder="Digite o preço" value=''/>
-                        <x-input-form title="Quantidade inicial do produto:" class="qtinitadd" name="" placeholder="Quantidade Inicial" value=''/>
+                        <x-input-form title="Código do produto: (Apenas números)" class="codadd" name="" placeholder="Código do produto" value='' validation="identification_number" :readonly="False"/>
+                        <x-button-2 text="Gerar código aleatório" classe="genrandom"/>
+                        <x-input-form title="Nome do produto:" class="nameadd" name="" placeholder="Nome" value='' validation="name" :readonly="False"/>
+                        <x-input-form-money title="Preço do produto:" class="priceadd" name="amount" placeholder="Digite o preço" value='' validation="price"/>
+                        <x-input-form title="Quantidade inicial do produto:" class="qtinitadd" name="" placeholder="Quantidade Inicial" value='' validation="quantity" :readonly="False"/>
 
                         <button class="default-button-2">Enviar</button>
                     </div>
@@ -66,4 +56,5 @@
 @section('footer')
 <script src="https://unpkg.com/imask"></script>
 <script src="{{asset('assets/js/products_control_script.js') }}"></script>
+<script src="{{asset('assets/js/format_money.js') }}"></script>
 @endsection
