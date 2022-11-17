@@ -27,12 +27,11 @@ class ProdutosController extends Controller
     }
 
     public function products() {
-        $checkLogin = auth('sanctum')->user();
         return view('produtos', ['user' => $this->user, 'data' => $this->listAllProducts()]);
     }
 
     private function listAllProducts() {
-        $produto = Produto::where('user_id', '=', $this->user->id)->paginate(20);
+        $produto = Produto::where('user_id', '=', $this->user->id)->orderBy('created_at','desc')->paginate(20);
         return $produto;
     }
 
@@ -72,7 +71,7 @@ class ProdutosController extends Controller
 
             LogController::newLog($warningLog);
 
-            return redirect()->route('products');;
+            return redirect()->route('products');
         } else {
             session()->put('flash', 'Você precisa preencher todos os campos');
             return redirect()->route('edit-product');

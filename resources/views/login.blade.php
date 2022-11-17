@@ -21,6 +21,10 @@
                         @if(session('danger'))
                         <span style="color: #FF0000">{{session('danger')}}</span>
                         @endif
+
+                        @if(session('completed-registration'))
+                            <span style="color: green">{{session('completed-registration')}}</span>
+                        @endif
                     <div class="inputs-auth">
                         <p>Email *:</p>
                     <input type="text" name="email" autocomplete="off" placeholder="Insira aqui seu e-mail">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -11,16 +13,40 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function signin() {
-        return view('sign-in');
+    public function signup() {
+        return view('sign-up');
+    }
+
+    public function signupaction(Request $r) {
+        $this->validate($r,[
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required'
+        ],[
+            'name' => 'required',
+            'email.required' => "E-mail é obrigatório",
+            'email.email' => "Esse email não é valido",
+            'password.required' =>"Senha é obrigatória"
+        ]);
+        $user = User::where('email',$r->email)->first();
+        if($user == null) {
+            User::insert(
+                [
+                    'name' => $r->name,
+                    'email' => $r->email,
+                    'password' => Hash::make($r->password)
+                ]
+            );
+            return redirect()->route('login')->with('completed-registration', 'Você se registrou, já pode entrar');
+        }
+
+        return redirect()->back()->with('danger', 'Já tem um usuario com esse email');
     }
 
     public function logout(Request $request) {
         Auth::logout();
         return redirect()->route('login');
     }
-
-
 
     public function auth(Request $r) {
         $this->validate($r,[

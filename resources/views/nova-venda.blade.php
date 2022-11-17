@@ -14,7 +14,8 @@
     </div>
     <div class="box-nova-venda">
         <div class="container-insert">
-
+            <div class="warn"></div>
+            <div class="warnerror"></div>
         <div class="insert-product">
             @csrf
         </div>

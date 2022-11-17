@@ -22,12 +22,6 @@ use App\Http\Controllers\StockController;
 
 Route::get('/findAllProducts', [ProdutosController::class, 'listAllProducts']);
 
-
-Route::prefix('auth')->group(function(){
-    Route::post('loginApi', [LoginController::class, 'loginApi']);
-    Route::post('logoutApi', [LoginController::class, 'logout']);
-    Route::post('registerApi', [RegisterController::class, 'registerApi']);
-});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

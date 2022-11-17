@@ -38,24 +38,22 @@ class StockController extends Controller
 
         $this->validate($r,[
             'identification_number' => 'integer|exists:produtos|required',
-            'quantity' => 'integer'
         ],[
             'identification_number.exists' => "Você ainda não cadastrou esse produto",
             'identification_number.required' => "É necessario inserir o código do produto",
             'identification_number.integer' => "O código do produto tem que ser numérico",
-            'quantity' => 'A quantidade inicial precisa ser um número'
         ]);
 
         $product = Produto::where('user_id', '=', $user->id)->where('identification_number', '=', $r->identification_number)->first();
         if($product) {
             $product->quantity = $product->quantity + $quantidade;
             $product->save();
-
         }
 
-        $warningLog = 'Adicionou '.$r->quantity.' unidades do produto '.$product->name;
+        $warningLog = 'Adicionou '.$quantidade.' unidades do produto '.$product->name;
         LogController::newLog($warningLog);
 
+        $product['quantity'] = $quantidade;
 
         header('Content-Type: application/json');
         return $product;

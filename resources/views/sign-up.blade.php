@@ -9,7 +9,7 @@
                     <h1>Cadastre-se</h1>
                     <hr class="center-diamond">
                 </div>
-                <form action="{{route('auth.user')}}" method="POST">
+                <form action="{{route('signupaction')}}" method="POST">
                         @csrf
                         @if ($errors->any())
                         @foreach($errors->all() as $error)
@@ -18,7 +18,7 @@
                         @endif
 
                         @if(session('danger'))
-                        {{session('danger')}}
+                           <p style="color: #FF0000">{{session('danger')}}</p>
                         @endif
                     <div class="inputs-auth">
                         <p>Nome *:</p>

@@ -117,19 +117,20 @@ body a {
 }
 
 .logged-user {
-    padding: 10px;
+    padding: 13px;
+    background-color: #57cc99;
     text-align: center;
 }
 
 .submenu li{
-    -webkit-animation: mostrar 0.4s;
+    animation: mostrar 0.3s;
     background-color: #7e96ff;
 }
 .submenu li span {
     color: #000;
 }
 
-@-webkit-keyframes mostrar {
+@keyframes mostrar {
     from { opacity: 0; margin-top: -20px }
     to { opacity: 1; margin: 0px; }
 }

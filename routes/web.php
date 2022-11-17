@@ -23,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'home'])->name('main')->middleware('auth');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/signin', [LoginController::class, 'signin'])->name('signin');
+Route::get('/signup', [LoginController::class, 'signup'])->name('signup');
+Route::post('/signupaction', [LoginController::class, 'signupaction'])->name('signupaction');
 
 Route::post('/auth', [LoginController::class, 'auth'])->name('auth.user');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -38,10 +39,23 @@ Route::prefix('products')->group(function() {
     Route::post('/add-product', [StockController::class, 'addProduct'])->name('addProduct');
 });
 
-//Actions
+Route::prefix('contas')->group(function() {
+    Route::get('/', [ContasController::class, 'home'])->name('invoice')->middleware('auth');
+    Route::get('/delete/{id?}', [ContasController::class, 'delete'])->name('deleteinvoice')->middleware('auth');
+    Route::get('/editstatus/{id?}/{status?}', [ContasController::class, 'edit'])->name('editstatus')->middleware('auth');
+    Route::get('/add', [ContasController::class, 'add'])->name('addInvoiceScreen')->middleware('auth');
+    Route::post('/add/action', [ContasController::class, 'addAction'])->name('addInvoice')->middleware('auth');
+    Route::get('/search', [ContasController::class, 'foundInvoice'])->name('foundInvoice')->middleware('auth');
+});
+
+Route::prefix('dashboard')->group(function() {
+    Route::get('/get-best-sellers', [DashboardController::class, 'getBestSellers'])->middleware('auth');
+    Route::get('/get-last-days', [DashboardController::class, 'lastDaysVendas'])->middleware('auth');
+
+});
+
 
 Route::post('/add-stock', [StockController::class, 'addStock']);
-
 
 Route::get('/product/{id?}', [ProdutosController::class, 'foundProducts'])->name('found-products')->middleware('auth');
 
@@ -56,15 +70,3 @@ Route::get('/detalhes-venda/{id?}', [VendasController::class, 'detalhesvenda'])-
 
 Route::post('/new-log', [LogController::class, 'newLog'])->middleware('auth');
 
-Route::get('/contas', [ContasController::class, 'home'])->name('invoice')->middleware('auth');
-Route::get('/contas/delete/{id?}', [ContasController::class, 'delete'])->name('deleteinvoice')->middleware('auth');
-Route::get('/contas/editstatus/{id?}/{status?}', [ContasController::class, 'edit'])->name('editstatus')->middleware('auth');
-Route::get('/contas/add', [ContasController::class, 'add'])->name('addInvoiceScreen')->middleware('auth');
-Route::post('/contas/add/action', [ContasController::class, 'addAction'])->name('addInvoice')->middleware('auth');
-Route::get('/contas/search', [ContasController::class, 'foundInvoice'])->name('foundInvoice')->middleware('auth');
-
-Route::prefix('dashboard')->group(function() {
-    Route::get('/get-best-sellers', [DashboardController::class, 'getBestSellers'])->middleware('auth');
-    Route::get('/get-last-days', [DashboardController::class, 'lastDaysVendas'])->middleware('auth');
-
-});
