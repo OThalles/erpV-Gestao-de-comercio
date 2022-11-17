@@ -55,11 +55,6 @@
             </div>
         </div>
 
-        <!--
-        <div class="all-products-box">
-
-        </div>
-        -->
     </div>
 
 </div>

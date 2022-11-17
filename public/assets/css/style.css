@@ -581,18 +581,21 @@ width: 80vw;
 display: flex;
 justify-content: center;
 list-style: none;
-color: red;
+
 }
-.paginate nav ul li {
+.paginate nav ul li, .paginate nav ul li:visited {
     padding: 5px;
-    border: 1px solid var(--dark-blue);
+    text-decoration: none;
     margin: 5px;
+    color: black;
 }
 
 .active {
-    background-color: var(--white);
-    color: var(--snow-color);
+    background-color: var(--snow-color);
+    color: #90e0ef;
+    border-radius: 4px;
 }
+
 
 /*Contas*/
 .container-options {

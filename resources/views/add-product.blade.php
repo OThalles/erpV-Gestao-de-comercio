@@ -47,6 +47,5 @@
 
 @section('footer')
 <script src="https://unpkg.com/imask"></script>
-<script src="{{asset('assets/js/products_control_script.js') }}"></script>
-<script src="{{asset('assets/js/format_money.js') }}"></script>
+<script src="{{asset('assets/js/products_control_script.js') }}"></script>  
 @endsection

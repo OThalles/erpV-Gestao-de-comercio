@@ -77,11 +77,9 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
                     produto[responseData.identification_number] = produto[responseData.identification_number] + 1 || 1
                 }
 
-                console.log(produto)
                 /**
                  * Criação do produto na tabela;
                  */
-
 
                 createProduct = document.createElement('tr')
                 txtCod = document.createTextNode(responseData.identification_number)
@@ -121,11 +119,6 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
                 var height = el.scrollHeight;
                 el.scrollTop = height;
 
-                // document.querySelector('.warnerror').style.display = "none";
-
-                // let textSubmit = "Produto:"+ responseData.name+" | Preço: "+ responseData.price;
-                // document.querySelector('.warn').innerHTML = textSubmit;
-                // document.querySelector('.warn').style.display = "block";
 
 
                localStorage.setItem('countProducts',

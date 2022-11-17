@@ -12,7 +12,7 @@
         </div>
             <a href="{{url('/')}}">
                 <li class="{{ (request()->is('/')) ? 'active' : '' }}">
-                    <img src="{{asset('assets/icons/shop_icon.png')}}" alt=""> <span>Dashboard</span>
+                    <img src="{{asset('assets/icons/dashboard.png')}}" alt=""> <span>Dashboard</span>
                 </li>
             </a>
             <a href="{{url('nova-venda')}}">
@@ -34,28 +34,25 @@
                         </li></a>
             <a href="{{url('products')}}">
                 <li class="{{ (request()->is('products')) ? 'active' : '' }}">
-                    <img src="{{asset('assets/icons/stock-control-icon.png')}}" alt=""> <span>Produtos</span>
+                    <img src="{{asset('assets/icons/products.png')}}" alt=""> <span>Produtos</span>
                 </li></a>
             <a href="{{url('contas')}}">
                 <li class="{{ (request()->is('relatorios')) ? 'active' : '' }}">
-                    <img src="{{asset('assets/icons/info-icon.png')}}" alt=""> <span>Contas</span>
+                    <img src="{{asset('assets/icons/invoice.png')}}" alt=""> <span>Contas</span>
                 </li>
             </a>
             <a href="{{url('log')}}">
                 <li class="{{ (request()->is('log')) ? 'active' : '' }}">
-                    <img src="{{asset('assets/icons/info-icon.png')}}" alt=""> <span>Histórico</span>
+                    <img src="{{asset('assets/icons/historical.png')}}" alt=""> <span>Histórico</span>
                 </li>
             </a>
             <a href="{{url('vendas')}}">
                 <li class="{{ (request()->is('vendas')) ? 'active' : '' }}">
-                    <img src="{{asset('assets/icons/info-icon.png')}}" alt=""> <span>Vendas</span>
+                    <img src="{{asset('assets/icons/sales.png')}}" alt=""> <span>Vendas</span>
                 </li>
             </a>
-            <a href="">
-                <li> <span>Em breve</span></li>
-            </a>
             <a href="{{route('logout')}}">
-                <li><span>Deslogar</span></li>
+                <li> <img src="{{asset('assets/icons/logout.png')}}" alt=""> <span>Sair</span></li>
             </a>
 
         </ul>

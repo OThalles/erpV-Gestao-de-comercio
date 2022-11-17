@@ -12,7 +12,7 @@
             <div class="box-found-items-find">
                 <x-top-buttons name='Todos os produtos' :button="True" routes='addproduct' namebuttons='Novo produto'/>
                 <x-border-table routes='found-products' count="{{count($data)}}" :search="True"/>
-                
+
                     <div class="table-products">
                         <table class="p">
                             <tr>
@@ -45,7 +45,7 @@
 
                         </table>
                         <div class="paginate">
-                            <div>{{$data->links()}}</div>
+                            <div>{{$data->links("pagination::bootstrap-4")}}</div>
                         </div>
                 </div>
 
