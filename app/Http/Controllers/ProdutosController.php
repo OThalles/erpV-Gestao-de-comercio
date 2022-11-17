@@ -80,7 +80,7 @@ class ProdutosController extends Controller
     }
 
     public function deleteProduct(Request $r){
-        $produto = Produto::find($r->id)->delete();
+        $produto = Produto::where('user_id', $this->user->id)->where('identification_number',$r->id)->delete();
         return redirect()->route('products');
 
     }
@@ -90,7 +90,7 @@ class ProdutosController extends Controller
         $id = $r->id;
 
         if(!empty($id)) {
-            $produto = Produto::find($id);
+            $produto = Produto::where('user_id', $this->user->id)->where('identification_number',$r->id)->first();
             return view('foundProduct', ['user' => $checkLogin, 'data' => $produto]);
         }
         return redirect()->route('products');

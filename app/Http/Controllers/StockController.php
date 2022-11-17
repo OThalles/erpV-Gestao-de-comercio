@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Produto;
 use Illuminate\Validation\Rule;
+use Image;
 
 class StockController extends Controller
 {
@@ -64,6 +65,7 @@ class StockController extends Controller
         $user = Auth::User();
         $this->validate($r,[
             'name' => 'required|min:1|max:255',
+            'image' => 'mimes:jpeg,png,jpg:max:2048',
             'price' => 'required',
             'identification_number' => [Rule::unique('produtos')->where(function($query){
                 $query->where('user_id', Auth::User()->id);
@@ -81,15 +83,27 @@ class StockController extends Controller
             'quantity.required' => "É necessário inserir a quantidade inicial do produto",
             'quantity.numeric' => "A quantidade deve ser um valor numérico"
         ]);
+        if($r->hasFile('image') && $r->file('image')->isValid()) {
+            $requestImage = $r->image;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . '.' .$extension;
+            $imgresize = Image::make($requestImage->getRealPath());
+            $imgresize->resize(300,300);
+            $imgresize->save(public_path('assets/img/products/'. $imageName));
+
+        }
+
 
         $data = [
             'user_id' => $user->id,
             'identification_number' => $r->identification_number,
             'name' => $r->name,
             'price' => str_replace(['.',','],['','.'],$r->price),
+            'photo' => $imageName,
             'qt_vendas' => 0,
             'quantity' => $r->quantity
         ];
+
         try {
             $insertProduct = Produto::create($data);
             $warningLog = 'Adicionou o produto '.$r->name.' com '.$r->quantity.' unidades iniciais';

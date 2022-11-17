@@ -16,7 +16,7 @@
             </div>
             <div class="box-found-items-add">
 
-                <form class="add-product-form">
+                <form class="add-product-form" id="add-product-form">
                     @csrf
                     <div class="campos-form-container">
                         <div class="campos-form">
@@ -27,11 +27,12 @@
                         </div>
                         <div class="warnerror"></div>
                         <div class="warn"></div>
-                        <x-input-form title="Código do produto: (Apenas números)" class="codadd" name="" placeholder="Código do produto" value='' validation="identification_number" :readonly="False"/>
+                        <x-input-photo title="Imagem do produto"/>
+                        <x-input-form title="Código do produto: (Apenas números)" class="codadd" name="identification_number" placeholder="Código do produto" value='' validation="identification_number" :readonly="False"/>
                         <x-button-2 text="Gerar código aleatório" classe="genrandom"/>
-                        <x-input-form title="Nome do produto:" class="nameadd" name="" placeholder="Nome" value='' validation="name" :readonly="False"/>
-                        <x-input-form-money title="Preço do produto:" class="priceadd" name="amount" placeholder="Digite o preço" value='' validation="price"/>
-                        <x-input-form title="Quantidade inicial do produto:" class="qtinitadd" name="" placeholder="Quantidade Inicial" value='' validation="quantity" :readonly="False"/>
+                        <x-input-form title="Nome do produto:" class="nameadd" name="name" placeholder="Nome" value='' validation="name" :readonly="False"/>
+                        <x-input-form-money title="Preço do produto:" class="priceadd" name="price" placeholder="Digite o preço" value='' validation="price"/>
+                        <x-input-form title="Quantidade inicial do produto:" class="qtinitadd" name="quantity" placeholder="Quantidade Inicial" value='' validation="quantity" :readonly="False"/>
 
                         <button class="default-button-2">Enviar</button>
                     </div>
@@ -39,15 +40,6 @@
             </form>
             </div>
 
-
-
-
-
-        <!--
-        <div class="all-products-box">
-
-        </div>
-        -->
     </div>
 
 </div>

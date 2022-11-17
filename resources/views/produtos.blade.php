@@ -10,37 +10,35 @@
 
     <div class="default-box">
             <div class="box-found-items-find">
-                <x-top-buttons tonga='Todos os produtos' routes='addproduct' namebuttons='Novo produto'/>
-                <x-border-table routes='found-products' count="{{count($data)}}"/>
-
-                    {{-- <div class="campos-search">
-                        <div class="search-container">
-                            <form action="{{route('found-products')}}" method="GET">
-                                <div class="search-bar">
-                                <input type="text" class="product-form" name="id" autocomplete="off" id="" placeholder="Pesquisar pelo código">
-                                <a href="" class="search-btn">
-
-                                    <img  class="loupe-white" src="{{asset('assets/icons/loupe-white.svg')}}" alt="">
-                                </a>
-                                </div>
-                                </form>
-                            </div>
-                        </div> --}}
+                <x-top-buttons name='Todos os produtos' :button="True" routes='addproduct' namebuttons='Novo produto'/>
+                <x-border-table routes='found-products' count="{{count($data)}}" :search="True"/>
+                
                     <div class="table-products">
                         <table class="p">
                             <tr>
-                                <x-th-tables :th="['Código', 'Produto', 'Preço', 'Quantidade', 'Ação']"/>
+                                <x-th-tables :th="['Código', 'Foto','Produto', 'Preço', 'Quantidade', 'Ação']"/>
                             </tr>
 
                             @foreach($data as $key => $produto)
                             <tr class="normalelement" data-id="{{$key}}">
                                 <td>{{$produto['identification_number']}}</td>
+                                <td><img src="{{asset('assets/img/products/'.$produto['photo'])}}" width="85px" height="85px" alt="isso"></td>
                                 <td>{{$produto['name']}}</td>
-                                <td>{{$produto['price']}}</td>
+                                <td>R$ {{$produto['price']}}</td>
                                 <td>{{$produto['quantity']}}</td>
-                                <td>
-                                    <a  href="{{url('products/edit-product').'/'.$produto['identification_number']}}" style="color:green">Alterar</a>
-                                    <a href="{{url('products/delete-product').'/'.$produto['identification_number']}}" style="color:red">Remover</a>
+                                <td class="actions">
+                                    <div class="actions-container">
+                                    <a  href="{{url('products/edit-product').'/'.$produto['identification_number']}}" style="color:green">
+                                        <div class="circle edit">
+                                            <img title="Editar" src="{{asset('assets/icons/edit.png')}}" class="icon-action" alt="Editar">
+                                        </div>
+                                    </a>
+                                    <a href="{{url('products/delete-product').'/'.$produto['identification_number']}}" style="color:red">
+                                        <div class="circle remove">
+                                            <img title="Remover" src="{{asset('assets/icons/trash.png')}}" class="icon-action" alt="Remover">
+                                        </div>
+                                     </a>
+                                </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -54,17 +52,13 @@
             </div>
         </div>
 
-        <!--
-        <div class="all-products-box">
-
-        </div>
-        -->
     </div>
 
 </div>
 @endsection
 @section('footer')
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{asset('assets/js/find_products_ajax.js') }}"></script>
-<script src="{{asset('assets/js/table_decoration.js') }}"></script>
+<script src="{{asset('assets/js/tables_decoration.js') }}"></script>
 @endsection

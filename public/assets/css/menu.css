@@ -41,7 +41,6 @@ body a {
     justify-content: center;
     height: 110vh;
     width: 10vw;
-    z-index: 2000;
     background-color: #4361ee;
 
 }
@@ -145,6 +144,3 @@ body a {
 
 /* Menu topo */
 
-.top-menu-container {
-    width: 100%;
-}

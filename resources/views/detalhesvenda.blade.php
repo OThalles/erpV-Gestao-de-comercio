@@ -25,12 +25,14 @@
 
                             <th>Produto</th>
                             <th>Preço</th>
+                            <th>Quantidade</th>
                         </tr>
 
                         @foreach($data as $key => $produto)
                         <tr class="normalelement" data-id="{{$key}}">
                             <td>{{$produto['name']}}</td>
                             <td>{{$produto['value']}}</td>
+                            <td>{{$produto['quantity']}}</td>
                         </tr>
                         @endforeach
 

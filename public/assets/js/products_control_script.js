@@ -3,26 +3,24 @@ document.querySelector('.genrandom').addEventListener('click', function(){
 })
 
 
-document.querySelector(".add-product-form").addEventListener('submit', async(e)=>{
+$("#add-product-form").submit(function(e) {
 
     e.preventDefault();
-    codProductAdd = document.querySelector('.codadd')
-    nameProductAdd = document.querySelector('.nameadd')
-    priceProductAdd = document.querySelector('.priceadd')
-    qtinitProductAdd = document.querySelector('.qtinitadd')
+    // image = document.querySelector('.from-control-file')
+    // codProductAdd = document.querySelector('.codadd')
+    // nameProductAdd = document.querySelector('.nameadd')
+    // priceProductAdd = document.querySelector('.priceadd')
+    // qtinitProductAdd = document.querySelector('.qtinitadd')
 
-    payload = {
-        identification_number:codProductAdd.value,
-        name:nameProductAdd.value,
-        price:priceProductAdd.value,
-        quantity:qtinitProductAdd.value
-    };
+    // payload = {
+    //     image:image,
+    //     identification_number:codProductAdd.value,
+    //     name:nameProductAdd.value,
+    //     price:priceProductAdd.value,
+    //     quantity:qtinitProductAdd.value
+    // };
 
-    let data = new FormData();
-    data.append('identification_number', payload.identification_number)
-    data.append('name', payload.name)
-    data.append('price', payload.price)
-    data.append('quantity', payload.quantity)
+    let data = new FormData(this);
 
     $.ajaxSetup({
         headers: {
@@ -34,6 +32,8 @@ document.querySelector(".add-product-form").addEventListener('submit', async(e)=
         url: "add-product",
         type: "POST",
         data: data,
+        encType: "multipart/form-data",
+        cache: false,
         processData: false,
         contentType: false,
         beforeSend:function(){
@@ -41,6 +41,7 @@ document.querySelector(".add-product-form").addEventListener('submit', async(e)=
         }
 
     }).done(function(data) {
+        $('#image').val('');
         let textSubmit = "O produto "+data.name+" foi adicionado com sucesso";
         document.querySelector('.codadd').value = ''
         document.querySelector('.nameadd').value = ''
@@ -50,12 +51,12 @@ document.querySelector(".add-product-form").addEventListener('submit', async(e)=
         document.querySelector('.warn').style.display = "block";
 
     }).fail(function(jqXHR, textStatus ) {
-
-
         $.each(jqXHR.responseJSON.errors, function(prefix,val){
-            $('p.'+prefix+'_error').text(val[0]);
+             $('p.'+prefix+'_error').text(val[0]);
         })
+
     })
+
 
 
 
@@ -79,6 +80,5 @@ document.querySelector(".add-product-form").addEventListener('submit', async(e)=
         //     document.querySelector('.warnerror').innerHTML = "Você precisa preencher todos os campos";
         //     document.querySelector('.warnerror').style.display = "flex";
         // })
+
 })
-
-

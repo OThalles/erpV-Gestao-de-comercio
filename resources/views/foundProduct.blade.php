@@ -19,11 +19,7 @@
                 <div class="table-products">
                     <table class="p">
                         <tr>
-                            <th>Cód</th>
-                            <th>Produto</th>
-                            <th>Preço</th>
-                            <th>Quantidade</th>
-                            <th>Ação</th>
+                            <x-th-tables :th="['Código', 'Produto','Preço', 'Quantidade', 'Ação']"/>
                         </tr>
 
                         <tr>

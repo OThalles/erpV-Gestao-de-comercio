@@ -28,10 +28,13 @@ class VendasController extends Controller
     }
 
     public function finalizeSale(Request $r) {
-
-        $data = ['made_by' => $this->user->id, 'quantity_products' => $r->quantity_products, 'amount'=> $r->amount];
-        $newSale = Venda::create($data);
-
+        $newSale = [
+            'error' => 'Ocorreu um erro'
+        ];
+        if(count($r->all()) < 100) {
+            $data = ['made_by' => $this->user->id, 'quantity_products' => $r->quantity_products, 'amount'=> $r->amount];
+            $newSale = Venda::create($data);
+        }
         header('Content-Type: application/json');
         return json_encode($newSale);
 
@@ -46,16 +49,11 @@ class VendasController extends Controller
             $updateDataProduct->increment('qt_vendas', $c);
             $updateDataProduct->decrement('quantity', $c);
             $AllProducts[] = $key;
-
         }
         //Converter os ids da array para inteiro.
         $finalData = [];
-        $ProdutosVendidos = Produto::whereIn('identification_number', $AllProducts)->get();
+        $ProdutosVendidos = Produto::where('user_id', $this->user->id)->whereIn('identification_number', $AllProducts)->get();
 
-
-        //$updateQt_Vendas = Produto::where('user_id', $this->user->id)->whereIn('identification_number', $mappedIds)->('qt_vendas', 1);
-
-        //$updateQuantity = Produto::where('user_id', $this->user->id)->whereIn('identification_number', $mappedIds)->decrement('quantity', 1);
         foreach($ProdutosVendidos as $produto) {
             $finalData[] =
             [
@@ -78,7 +76,7 @@ class VendasController extends Controller
     }
 
     public function detalhesvenda(Request $r) {
-        $produtos = ProdutoVendido::where('venda_id', '=', $r->id)->paginate(100);
+        $produtos = ProdutoVendido::where('user_id', $this->user->id)->where('venda_id', '=', $r->id)->paginate(100);
         $venda = Venda::find($r->id);
         return view('detalhesvenda', ['user' => Auth::User(), 'data' => $produtos, 'venda' => $venda]);
     }

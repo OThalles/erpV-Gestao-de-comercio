@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
     private function getVendasToday() {
         $today = new \DateTime('today');
-        $venda = Venda::where('created_at', 'LIKE', '%'.$today->format('Y/m/d').'%')->get()->count();
+        $venda = ProdutoVendido::where('user_id', '=', $this->user->id)->whereDate('created_at', date('Y-m-d'))->get()->count();
         return $venda;
     }
 
@@ -73,6 +73,7 @@ class DashboardController extends Controller
 
         //$produto = DB::select(DB::raw("SELECT created_at, COUNT(*) FROM produto_vendidos GROUP BY DAY(created_at)"));
         $produtodois = DB::table('produto_vendidos as w')
+                            ->where('user_id', $this->user->id)
                             ->select(array(DB::raw('sum(quantity) as Day_count'),DB::raw('DATE(w.created_at) day')))
                             ->groupBy('day')
                             ->orderBy('w.created_at')

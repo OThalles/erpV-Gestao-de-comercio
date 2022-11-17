@@ -15,29 +15,12 @@ class LoginController extends Controller
         return view('sign-in');
     }
 
-    public function loginApi(Request $request) {
-        if(Auth::attempt(['email' => $r->email, 'password' =>$r->password])) {
-            $token = Auth::user()->createToken('auth_token');
-            return response()->json([
-                            'data' => [
-                                'token' => $token->plainTextToken
-                            ]
-                            ]);
-
-            abort(401, 'Invalid Credentials');
-        }
-
-    }
-
     public function logout(Request $request) {
         Auth::logout();
         return redirect()->route('login');
     }
 
 
-    public static function IsLogged() {
-        return session()->has('user') ? session('user') : False;
-    }
 
     public function auth(Request $r) {
         $this->validate($r,[

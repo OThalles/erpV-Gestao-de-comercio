@@ -27,7 +27,6 @@ fetch('dashboard/get-last-days')
         data.labels.push(item.day)
         data.datasets[0].data.push(item.Day_count)
     })
-    console.log(data)
 
     const config = {
         type: 'line',
@@ -92,7 +91,6 @@ fetch('dashboard/get-best-sellers')
         datachart.datasets[0].backgroundColor.push('rgb(144,238,144)')
     }
 
-    console.log(datachart.labels)
 
     //Criação do gráfico
     const ctx2 = document.getElementById('myChartbestsellers').getContext("2d")

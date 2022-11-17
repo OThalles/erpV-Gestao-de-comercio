@@ -11,8 +11,7 @@
     <div class="default-box">
         <div class="secondary-warn" style="margin-bottom: 10px;">Nessa sessão, ficará salvo todas as alterações que um usuário fizer no sistema, exceto as vendas.</div>
             <div class="box-found-items-find">
-                <x-top-buttons tonga='Histórico' routes='addproduct' namebuttons='Novo produto'/>
-                <x-border-table routes='found-products' count="{{count($data)}}"/>
+                <x-border-table routes='found-products' count="{{count($data)}}" :search="False"/>
                 <div class="table-products">
                     @if(count($data) > 0)
                     <table class="p">

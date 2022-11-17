@@ -61,6 +61,7 @@ Route::get('/contas/delete/{id?}', [ContasController::class, 'delete'])->name('d
 Route::get('/contas/editstatus/{id?}/{status?}', [ContasController::class, 'edit'])->name('editstatus')->middleware('auth');
 Route::get('/contas/add', [ContasController::class, 'add'])->name('addInvoiceScreen')->middleware('auth');
 Route::post('/contas/add/action', [ContasController::class, 'addAction'])->name('addInvoice')->middleware('auth');
+Route::get('/contas/search', [ContasController::class, 'foundInvoice'])->name('foundInvoice')->middleware('auth');
 
 Route::prefix('dashboard')->group(function() {
     Route::get('/get-best-sellers', [DashboardController::class, 'getBestSellers'])->middleware('auth');

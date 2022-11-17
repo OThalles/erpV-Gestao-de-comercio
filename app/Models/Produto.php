@@ -14,6 +14,7 @@ class Produto extends Model
         'identification_number',
         'name',
         'price',
+        'photo',
         'quantity'
     ];
 

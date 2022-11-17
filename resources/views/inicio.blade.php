@@ -10,7 +10,7 @@
     <div class="dashboard-container"></div>
     <div class="dashboard-item sell">
         <h2>Vendas hoje:</h2>
-        <h3>cringe</h3>
+        <h3>{{$vendastoday}}</h3>
     </div>
     <div class="dashboard-item products">
         <h2>Produtos Disponíveis</h2>

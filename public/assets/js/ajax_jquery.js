@@ -1,23 +1,19 @@
 
-var produto = {};
+const produto = {};
 
-document.querySelector('.nova-venda').style.display = 'none'
-
-
-
+localStorage.setItem('countProducts', JSON.stringify({'countProducts': 0}));
+localStorage.setItem('countPrice', JSON.stringify({'countPrice': 0.00}));
 buttonFinish = document.querySelector('.default-button-2')
 buttonFinish.addEventListener('click', function(){
 
-    let count = document.querySelector('.count-product').textContent
-    let amount = document.querySelector('.total-price').textContent
-    let amountFormatted = amount.slice(3).replace(/,/g, ".")
-    if(count > 0) {
+
+    let getCountProducts =JSON.parse(localStorage.getItem('countProducts')).countProducts
+    let getCountPrice = JSON.parse(localStorage.getItem('countPrice')).countPrice
+
+    if(getCountProducts > 0) {
         data = new FormData();
-        console.log(count)
-        console.log(amountFormatted)
-        console.log(JSON.stringify(produto));
-        data.append('amount', amountFormatted);
-        data.append('quantity_products', count);
+        data.append('amount', getCountPrice);
+        data.append('quantity_products', Object.values(produto).reduce((partialSum, a) => partialSum + a, 0));
 
             $.ajaxSetup({
                 headers: {
@@ -46,54 +42,21 @@ buttonFinish.addEventListener('click', function(){
                     })
                     .then(function(res){ return res.json(); })
                     .then((data => {
-                        console.log("Foi");
                         window.location.href = "/";
                     }))
 
-            }).fail(function(jqXHR, textStatus ) {
-                console.log("Request failed: " + textStatus);
-
-            }).always(function() {
-                console.log("completou");
-            });
+            })
 
 
-
-            // fetch('/finalize-sale', {
-            //     method: 'POST',
-            //     headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content') },
-            //     body: data
-            // })
-            // .then(function(res){ return res.json(); })
-            // .then((data => {
-            //     //Requisição para finalizar a venda e contabilizar os dados
-            //     let produtos = new FormData()
-            //     produtos.append('produtos', JSON.stringify(produto));
-            //     produtos.append('venda_id', data.id);
-            //     fetch('/insertprodutosvendidos', {
-            //         method: 'POST',
-            //         headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content') },
-            //         body: produtos
-            //     })
-            //     .then(function(res){ return res.json(); })
-            //     .then((data => {
-            //         console.log("Foi");
-            //         window.location.href = "/";
-            //     }))
-
-            // }))
     }
 })
 
-
-let countPrice = 0.00
 document.querySelector('.product-form').addEventListener('keyup', function(e) {
     if(e.keyCode == 13) {
         e.preventDefault()
         codebar = this.value
         this.value = '';
         //Busca do produto na url, para fazer a listagem na tabela
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -106,24 +69,18 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
             dataType: "JSON"
 
         }).done(function(responseData) {
-            let count = document.querySelector('.count-product');
             if(responseData) {
-                countPrice = countPrice + parseFloat(responseData.price);
-                console.log(countPrice)
-                let numero = parseInt(count.textContent) + 1;
                 //Checando se já tem o produto na lista
                 if(produto.hasOwnProperty(responseData.identification_number) == false) {
                     produto[responseData.identification_number] = 1
                 } else {
                     produto[responseData.identification_number] = produto[responseData.identification_number] + 1 || 1
                 }
-                console.log(JSON.stringify(produto));
+
+                console.log(produto)
                 /**
                  * Criação do produto na tabela;
                  */
-
-
-                 document.querySelector('.nova-venda').style.display = 'flex' //Exibir o cabeçalho da tabela
 
 
                 createProduct = document.createElement('tr')
@@ -136,9 +93,25 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
                 createProd.appendChild(txtName)
                 createPrice = document.createElement('td')
                 createPrice.appendChild(txtPrice)
+
+                createAction = document.createElement('td')
+                createCircle = document.createElement('div')
+                createCircle.className = 'circle remove'
+                createCircle.setAttribute('data-id', responseData.identification_number)
+                createIcon = document.createElement('img')
+                createIcon.src = iconRemove
+                createCircle.appendChild(createIcon)
+                createAction.appendChild(createCircle)
+
+
                 createProduct.appendChild(createCod)
                 createProduct.appendChild(createProd)
                 createProduct.appendChild(createPrice)
+                createProduct.appendChild(createAction)
+
+                $("#img-product").attr('src', publicUrl+'/'+responseData.photo)
+                $("#name_infotext").text(responseData.name)
+                $("#price_infotext").text("R$ "+responseData.price)
 
                 document.querySelector(".p").appendChild(createProduct)
                 /**
@@ -147,16 +120,28 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
                 el = document.querySelector('.p')
                 var height = el.scrollHeight;
                 el.scrollTop = height;
-                count = count + responseData.price
 
-                document.querySelector('.warnerror').style.display = "none";
+                // document.querySelector('.warnerror').style.display = "none";
 
-                let textSubmit = "Produto:"+ responseData.name+" | Preço: "+ responseData.price;
-                document.querySelector('.warn').innerHTML = textSubmit;
-                document.querySelector('.warn').style.display = "block";
+                // let textSubmit = "Produto:"+ responseData.name+" | Preço: "+ responseData.price;
+                // document.querySelector('.warn').innerHTML = textSubmit;
+                // document.querySelector('.warn').style.display = "block";
 
-                document.querySelector('.count-product').innerHTML = numero;
-                document.querySelector('.total-price').innerHTML = countPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+               localStorage.setItem('countProducts',
+                         JSON.stringify({
+                            'countProducts': JSON.parse(localStorage.getItem('countProducts')).countProducts + 1
+                        }));
+               localStorage.setItem('countPrice',
+                        JSON.stringify({
+                            'countPrice': JSON.parse(localStorage.getItem('countPrice')).countPrice + parseFloat(responseData.price)
+                        }))
+
+                let getCountProducts =JSON.parse(localStorage.getItem('countProducts')).countProducts
+                let getCountPrice = JSON.parse(localStorage.getItem('countPrice')).countPrice
+               document.querySelector('.count-product').innerHTML = parseInt(getCountProducts);
+               document.querySelector('.total-price').innerHTML = getCountPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
 
             } else {
                 /**
@@ -168,12 +153,7 @@ document.querySelector('.product-form').addEventListener('keyup', function(e) {
                 document.querySelector('.warnerror').style.display = "block";
             }
 
-        }).fail(function(jqXHR, textStatus ) {
-            console.log("Request failed: " + textStatus);
-
-        }).always(function() {
-            console.log("completou");
-        });
+        })
 
 
     }

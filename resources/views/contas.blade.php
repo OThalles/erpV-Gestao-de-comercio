@@ -12,8 +12,8 @@
 
 
             <div class="box-found-items-find">
-                <x-top-buttons tonga='Todas as contas' routes='addInvoiceScreen' namebuttons='Nova Conta'/>
-                <x-border-table routes='found-products' count="{{count($contas)}}"/>
+                <x-top-buttons name='Todas as contas' routes='addInvoiceScreen' :button="True" namebuttons='Nova Conta'/>
+                <x-border-table routes='found-products' count="{{count($contas)}}" :search="True"/>
 
                 <div class="table-products">
                     <table class="p">
@@ -34,7 +34,7 @@
                             <option value="{{$conta['id']}}:1" {{$conta['id']}} {{($conta['status'] == 1) ? 'selected':''}}>Pago</option>
 
                             </select></td>
-                            <td>08/12/2002</td>
+                            <td>{{$conta['created_at']}}</td>
                             <td><a href="{{route('deleteinvoice').'/'.$conta['id']}}" style="color:red" onclick="alert('Tem certeza que deseja remover?')">Remover</a></td>
                         </tr>
                         @endforeach

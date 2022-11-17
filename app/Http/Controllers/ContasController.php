@@ -53,5 +53,9 @@ class ContasController extends Controller
         $newInvoice = Conta::create($data);
         return redirect()->route('invoice');
     }
+
+    public function foundInvoice(Request $r) {
+        
+    }
 }
 
